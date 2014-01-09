@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Type-E/Type-E.iml" filepath="$PROJECT_DIR$/Type-E/Type-E.iml" />
+      <module fileurl="file://$PROJECT_DIR$/type-e.iml" filepath="$PROJECT_DIR$/type-e.iml" />
+    </modules>
+  </component>
+</project>
+
