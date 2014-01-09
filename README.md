@@ -1,4 +1,4 @@
-android
-=======
+Type-E on Android
+=================
 
-Android
+Type-E, an active hangout app.
