@@ -56,6 +56,14 @@ public class LoginActivity extends Activity {
 
         setContentView(R.layout.activity_login);
 
+        // Add your initialization code here
+        Parse.initialize(this, "mFrewsKnWGVdz9AJJHfaN7WXKxq5LAz2Mp8B8mIR", "R88iw1KmwjFuUqaOxx8qceVGkzivBiQnKuICJCvJ");
+        //Parse
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
+        //End Parse
+        
         // Set up the login form.
         mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
         mEmailView = (EditText) findViewById(R.id.email);
