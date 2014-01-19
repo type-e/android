@@ -15,11 +15,18 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
 public class LoginActivity extends Activity {
+    /**
+     * The default email to populate the email field with.
+     */
+    public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -28,12 +35,6 @@ public class LoginActivity extends Activity {
             "foo@example.com:hello",
             "bar@example.com:world"
     };
-
-    /**
-     * The default email to populate the email field with.
-     */
-    public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
-
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -63,7 +64,7 @@ public class LoginActivity extends Activity {
         testObject.put("foo", "bar");
         testObject.saveInBackground();
         //End Parse
-        
+
         // Set up the login form.
         mEmail = getIntent().getStringExtra(EXTRA_EMAIL);
         mEmailView = (EditText) findViewById(R.id.email);
