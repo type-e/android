@@ -5,8 +5,13 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="$PROJECT_DIR$/../../../SDK/gradle-1.10" />
-        <option name="useAutoImport" value="true" />
+        <option name="gradleHome" value="C:/../SDK/gradle-1.10" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Type-E" />
+          </set>
+        </option>
       </GradleProjectSettings>
     </option>
   </component>
