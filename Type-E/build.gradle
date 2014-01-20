@@ -1,3 +1,7 @@
+def versionMajor = 0
+def versionMinor = 0
+def versionPatch = 1
+
 buildscript {
     repositories {
         mavenCentral()
@@ -19,6 +23,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 19
+        versionCode versionMajor * 100 + versionMinor * 10 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
     }
 }
 

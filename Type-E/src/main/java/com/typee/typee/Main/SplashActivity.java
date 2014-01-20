@@ -140,9 +140,21 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                loadingText.setText("Passed the halfway mark...");
+                loadingText.setText("Passed the 2000ms mark...");
+	            new Handler().postDelayed(new Runnable() {
+		            @Override
+		            public void run() {
+			            loadingText.setText("Passed the 4000ms mark...");
+			            new Handler().postDelayed(new Runnable() {
+				            @Override
+				            public void run() {
+					            loadingText.setText("Final Load @ 6000ms");
+				            }
+			            }, 2000);
+		            }
+	            }, 2000);
             }
-        }, 5000);
+        }, 2000);
     }
 
     @Override
@@ -152,7 +164,7 @@ public class SplashActivity extends Activity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100);
+        delayedHide(AUTO_HIDE_DELAY_MILLIS);
 
         // todo check if user is logged in, then load activity accordingly
         new Handler().postDelayed(new Runnable() {
