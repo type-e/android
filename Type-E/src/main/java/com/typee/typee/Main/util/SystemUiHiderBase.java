@@ -1,4 +1,4 @@
-package com.typee.typee.Main.util;
+package com.typee.typee.main.util;
 
 import android.app.Activity;
 import android.view.View;

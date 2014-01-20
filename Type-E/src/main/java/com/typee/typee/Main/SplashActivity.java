@@ -1,4 +1,4 @@
-package com.typee.typee.Main;
+package com.typee.typee.main;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.typee.typee.LoginActivity;
-import com.typee.typee.Main.util.SystemUiHider;
+import com.typee.typee.main.util.SystemUiHider;
 import com.typee.typee.R;
 
 /**
@@ -163,8 +163,8 @@ public class SplashActivity extends Activity {
 
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
-        // are available.
-        delayedHide(AUTO_HIDE_DELAY_MILLIS);
+        // are available
+        delayedHide(100);
 
         // todo check if user is logged in, then load activity accordingly
         new Handler().postDelayed(new Runnable() {
@@ -176,7 +176,6 @@ public class SplashActivity extends Activity {
                 SplashActivity.this.finish();
             }
         }, 10000);
-
     }
 
     /**

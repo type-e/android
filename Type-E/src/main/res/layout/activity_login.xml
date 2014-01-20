@@ -1,7 +1,6 @@
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <!-- Login progress -->
     <LinearLayout
@@ -17,7 +16,7 @@
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"/>
 
         <TextView
             android:id="@+id/login_status_message"
@@ -26,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="@string/login_progress_signing_in" />
+            android:text="@string/login_progress_signing_in"/>
     </LinearLayout>
 
     <!-- Login form -->
@@ -46,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:hint="@string/prompt_email" />
+                android:hint="@string/prompt_email"/>
 
             <EditText
                 android:id="@+id/password"
@@ -58,7 +57,7 @@
                 android:inputType="textPassword"
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeActionId="@+id/login"
-                android:imeOptions="actionUnspecified" />
+                android:imeOptions="actionUnspecified"/>
 
             <Button
                 android:id="@+id/sign_in_button"
@@ -68,20 +67,9 @@
                 android:text="@string/action_sign_in_register"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:layout_gravity="right" />
+                android:layout_gravity="right"/>
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- The navigation drawer -->
-    <ListView
-        android:id="@+id/left_drawer"
-        android:layout_width="240dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
-        android:background="#111" />
-    
-</android.support.v4.widget.DrawerLayout>
+</FrameLayout>

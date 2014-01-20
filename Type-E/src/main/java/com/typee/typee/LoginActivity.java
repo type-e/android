@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.parse.Parse;
 import com.parse.ParseObject;
+import com.typee.typee.event.EventDetailsActivity;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -210,7 +212,7 @@ public class LoginActivity extends Activity {
 
 			try {
 				// Simulate network access.
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				return false;
 			}
@@ -233,6 +235,9 @@ public class LoginActivity extends Activity {
 			showProgress(false);
 
 			if (success) {
+				Intent intent = new Intent(LoginActivity.this, EventDetailsActivity.class);
+
+				startActivity(intent);
 				finish();
 			} else {
 				mPasswordView.setError(getString(R.string.error_incorrect_password));
