@@ -3,7 +3,6 @@ package com.typee.typee;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -19,12 +18,13 @@ import android.widget.TextView;
 import com.parse.Parse;
 import com.parse.ParseObject;
 import com.typee.typee.event.EventDetailsActivity;
+import com.typee.typee.main.base.BaseActivity;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends BaseActivity {
 	/**
 	 * The default email to populate the email field with.
 	 */

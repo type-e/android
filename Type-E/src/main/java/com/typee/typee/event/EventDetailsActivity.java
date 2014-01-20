@@ -1,7 +1,6 @@
 package com.typee.typee.event;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,8 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.typee.typee.R;
+import com.typee.typee.main.base.BaseActivity;
 
-public class EventDetailsActivity extends Activity implements ActionBar.OnNavigationListener {
+public class EventDetailsActivity extends BaseActivity implements ActionBar.OnNavigationListener {
 
 	/**
 	 * The serialization (saved instance state) Bundle key representing the
