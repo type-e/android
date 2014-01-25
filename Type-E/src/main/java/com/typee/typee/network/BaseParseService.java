@@ -5,11 +5,4 @@ package com.typee.typee.network;
  */
 public class BaseParseService {
 
-
-
-
-
-
-
-
 }

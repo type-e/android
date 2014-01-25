@@ -61,15 +61,7 @@ public class LoginActivity extends BaseActivity {
 
         setContentView(R.layout.activity_login);
 
-        // Add your initialization code here
-        Parse.initialize(this, "mFrewsKnWGVdz9AJJHfaN7WXKxq5LAz2Mp8B8mIR", "R88iw1KmwjFuUqaOxx8qceVGkzivBiQnKuICJCvJ");
-        //Parse
-//        ParseObject testObject = new ParseObject("TestObject");
-//        testObject.put("foo", "bar");
-//        testObject.saveInBackground();
-        //End Parse
-
-        RegistrationParseService.getParseService().signUp("username", "password", "winsonlim@gmail.com", 96786711, new RegistrationCallback() {
+        RegistrationParseService.getParseService().signUp("winsonlim", "password", "winson.lim@gmail.com", 96786711, new RegistrationCallback() {
             @Override
             public void registerSuccessful() {
                 Log.d(TAG, "register SUCCESSFUL!");

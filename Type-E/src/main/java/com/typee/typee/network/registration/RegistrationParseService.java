@@ -11,7 +11,6 @@ import com.typee.typee.network.BaseParseService;
 public class RegistrationParseService extends BaseParseService {
     private static RegistrationParseService instance;
 
-
     public static RegistrationParseService getParseService() {
         if (instance == null)
             instance = new RegistrationParseService();
