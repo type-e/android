@@ -1,4 +1,4 @@
-package com.typee.typee.UI.main.util;
+package com.typee.typee.ui;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
