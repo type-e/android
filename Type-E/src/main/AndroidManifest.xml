@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".ui3.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme" >
@@ -25,11 +25,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui3.LoginActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateVisible" />
         <activity
-            android:name=".ui.EventDetailsActivity"
+            android:name=".ui3.EventDetailsActivity"
             android:label="@string/title_activity_event_details" >
         </activity>
     </application>
