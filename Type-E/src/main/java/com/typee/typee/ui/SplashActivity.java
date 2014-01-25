@@ -1,4 +1,4 @@
-package com.typee.typee.ui3;
+package com.typee.typee.ui;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -10,14 +10,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.typee.typee.R;
-import com.typee.typee.ui3.main.BaseActivity;
-import com.typee.typee.ui3.main.SystemUiHider;
+import com.typee.typee.ui.main.BaseActivity;
+import com.typee.typee.ui.main.SystemUiHider;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  *
- * @see com.typee.typee.ui3.main.SystemUiHider
+ * @see com.typee.typee.ui.main.SystemUiHider
  */
 public class SplashActivity extends BaseActivity {
     /**
@@ -51,7 +51,7 @@ public class SplashActivity extends BaseActivity {
      */
     private static final boolean TOGGLE_ON_CLICK = true;
     /**
-     * The flags to pass to {@link com.typee.typee.ui3.main.SystemUiHider#getInstance}.
+     * The flags to pass to {@link com.typee.typee.ui.main.SystemUiHider#getInstance}.
      */
     private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
     Handler mHideHandler = new Handler();

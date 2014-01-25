@@ -1,4 +1,4 @@
-package com.typee.typee.ui3;
+package com.typee.typee.ui;
 
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -12,7 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.typee.typee.R;
-import com.typee.typee.ui3.main.BaseActivity;
+import com.typee.typee.ui.main.BaseActivity;
 
 public class EventDetailsActivity extends BaseActivity implements ActionBar.OnNavigationListener {
 

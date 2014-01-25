@@ -1,4 +1,4 @@
-package com.typee.typee.ui3;
+package com.typee.typee.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -20,7 +20,7 @@ import com.parse.Parse;
 import com.typee.typee.R;
 import com.typee.typee.network.registration.RegistrationCallback;
 import com.typee.typee.network.registration.RegistrationParseService;
-import com.typee.typee.ui3.main.BaseActivity;
+import com.typee.typee.ui.main.BaseActivity;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
