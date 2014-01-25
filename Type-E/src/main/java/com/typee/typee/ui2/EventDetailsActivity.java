@@ -1,4 +1,4 @@
-package com.typee.typee.ui;
+package com.typee.typee.ui2;
 
 import android.app.ActionBar;
 import android.app.Fragment;
