@@ -1,7 +1,6 @@
-package com.typee.typee.ui;
+package com.typee.typee.ui.main;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,8 +9,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.typee.typee.R;
-import com.typee.typee.ui.main.BaseActivity;
-import com.typee.typee.ui.main.SystemUiHider;
+import com.typee.typee.ui.base.BaseActivity;
+import com.typee.typee.ui.event.EventDetailsFragment;
+import com.typee.typee.util.Util;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -169,9 +169,11 @@ public class SplashActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
 
-                startActivity(intent);
+                Util.startActivity(SplashActivity.this, EventDetailsFragment.class.getName());
+
+//                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                startActivity(intent);
                 SplashActivity.this.finish();
             }
         }, 10000);

@@ -3,7 +3,6 @@ package com.typee.typee.ui;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,11 +15,12 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.parse.Parse;
 import com.typee.typee.R;
 import com.typee.typee.network.registration.RegistrationCallback;
 import com.typee.typee.network.registration.RegistrationParseService;
-import com.typee.typee.ui.main.BaseActivity;
+import com.typee.typee.ui.base.BaseActivity;
+import com.typee.typee.ui.event.EventDetailsFragment;
+import com.typee.typee.util.Util;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -242,9 +242,8 @@ public class LoginActivity extends BaseActivity {
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent(LoginActivity.this, EventDetailsActivity.class);
+                Util.startActivity(LoginActivity.this, EventDetailsFragment.class.getName());
 
-                startActivity(intent);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

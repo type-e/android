@@ -7,7 +7,7 @@ import com.parse.Parse;
 /**
  * Created by Winson Lim on 1/26/14.
  */
-public class GlobalState extends Application {
+public class MainApplication extends Application {
 
     @Override
     public void onCreate() {

@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.7.+'
+    }
+}
+
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion = 17
+
+//    sourceSets {
+//        main {
+//            assets.srcDirs = ['assets']
+//            res.srcDirs = ['res']
+//            aidl.srcDirs = ['src']
+//            resources.srcDirs = ['src']
+//            renderscript.srcDirs = ['src']
+//            java.srcDirs = ['src']
+//            manifest.srcFile 'AndroidManifest.xml'
+//        }
+//    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v13:18.0.0'
+    compile 'com.android.support:gridlayout-v7:18.0.+'
+}
