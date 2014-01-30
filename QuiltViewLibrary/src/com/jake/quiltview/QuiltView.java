@@ -16,7 +16,6 @@ import android.widget.ScrollView;
 
 import java.util.ArrayList;
 
-
 public class QuiltView extends FrameLayout implements OnGlobalLayoutListener {
 
     public QuiltViewBase quilt;
@@ -93,20 +92,29 @@ public class QuiltView extends FrameLayout implements OnGlobalLayoutListener {
     public void addPatchImages(ArrayList<ImageView> images) {
 
         for (ImageView image : images) {
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
-            image.setLayoutParams(params);
-
-            LinearLayout wrapper = new LinearLayout(this.getContext());
-            wrapper.setPadding(padding, padding, padding, padding);
-            wrapper.addView(image);
-            quilt.addPatch(wrapper);
+            addPatchImage(image);
         }
     }
+
+    public void addPatchImage(ImageView image) {
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+        image.setLayoutParams(params);
+
+        LinearLayout wrapper = new LinearLayout(this.getContext());
+        wrapper.setPadding(padding, padding, padding, padding);
+        wrapper.addView(image);
+        quilt.addPatch(wrapper);
+    }
+
 
     public void addPatchViews(ArrayList<View> views_a) {
         for (View view : views_a) {
             quilt.addPatch(view);
         }
+    }
+
+    public void addPatchView(View view) {
+        quilt.addPatch(view);
     }
 
     public void addPatchesOnLayout() {

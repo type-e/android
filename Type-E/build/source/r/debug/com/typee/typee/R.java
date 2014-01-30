@@ -33,6 +33,14 @@ public final class R {
 </table>
          */
         public static final int alignmentMode=0x7f010004;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int childPadding=0x7f01000d;
         /**  The maximum number of columns to create when automatically positioning children. 
          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -195,6 +203,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int rowOrderPreserved=0x7f010005;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int scrollOrientation=0x7f01000c;
         /** 
         When set to true, tells GridLayout to use default margins when none are specified
         in a view's layout parameters.
@@ -225,8 +241,9 @@ containing a value of this type.
         public static final int winson=0x7f020003;
     }
     public static final class id {
-        public static final int action_forgot_password=0x7f050021;
-        public static final int action_settings=0x7f050020;
+        public static final int FrameLayout1=0x7f05001c;
+        public static final int action_forgot_password=0x7f050024;
+        public static final int action_settings=0x7f050023;
         public static final int alignBounds=0x7f050002;
         public static final int alignMargins=0x7f050003;
         public static final int bottom=0x7f050005;
@@ -239,12 +256,12 @@ containing a value of this type.
         public static final int drawer_layout=0x7f050013;
         public static final int email=0x7f050018;
         public static final int end=0x7f050011;
-        public static final int event_attendee_quilt=0x7f05001f;
+        public static final int event_attendee_quilt=0x7f050021;
         public static final int fill=0x7f05000d;
         public static final int fill_horizontal=0x7f05000b;
         public static final int fill_vertical=0x7f050009;
-        public static final int fullscreen_content=0x7f05001c;
-        public static final int fullscreen_content_controls=0x7f05001d;
+        public static final int fullscreen_content=0x7f05001e;
+        public static final int fullscreen_content_controls=0x7f05001f;
         public static final int horizontal=0x7f050000;
         public static final int left=0x7f050006;
         public static final int left_drawer=0x7f050014;
@@ -252,10 +269,12 @@ containing a value of this type.
         public static final int login_form=0x7f050017;
         public static final int login_status=0x7f050015;
         public static final int login_status_message=0x7f050016;
+        public static final int menu_settings=0x7f050022;
         public static final int password=0x7f050019;
+        public static final int quilt=0x7f05001d;
         public static final int right=0x7f050007;
         public static final int sign_in_button=0x7f05001b;
-        public static final int splash_loading=0x7f05001e;
+        public static final int splash_loading=0x7f050020;
         public static final int start=0x7f050010;
         public static final int top=0x7f050004;
         public static final int vertical=0x7f050001;
@@ -264,12 +283,14 @@ containing a value of this type.
         public static final int activity_base=0x7f030000;
         public static final int activity_event_details=0x7f030001;
         public static final int activity_login=0x7f030002;
-        public static final int activity_splash=0x7f030003;
-        public static final int fragment_event_details=0x7f030004;
+        public static final int activity_main=0x7f030003;
+        public static final int activity_splash=0x7f030004;
+        public static final int fragment_event_details=0x7f030005;
     }
     public static final class menu {
-        public static final int event_details=0x7f090000;
-        public static final int login=0x7f090001;
+        public static final int activity_main=0x7f090000;
+        public static final int event_details=0x7f090001;
+        public static final int login=0x7f090002;
     }
     public static final class string {
         public static final int action_forgot_password=0x7f070000;
@@ -283,23 +304,33 @@ containing a value of this type.
         public static final int error_invalid_email=0x7f070008;
         public static final int error_invalid_password=0x7f070009;
         public static final int hello_blank_fragment=0x7f07000a;
-        public static final int login_progress_signing_in=0x7f07000b;
-        public static final int prompt_email=0x7f07000c;
-        public static final int prompt_password=0x7f07000d;
-        public static final int text_loading=0x7f07000e;
-        public static final int title_activity_event_details=0x7f07000f;
-        public static final int title_activity_splash=0x7f070010;
-        public static final int title_section1=0x7f070011;
-        public static final int title_section2=0x7f070012;
-        public static final int title_section3=0x7f070013;
+        public static final int hello_world=0x7f07000b;
+        public static final int login_progress_signing_in=0x7f07000c;
+        public static final int menu_settings=0x7f07000d;
+        public static final int prompt_email=0x7f07000e;
+        public static final int prompt_password=0x7f07000f;
+        public static final int text_loading=0x7f070010;
+        public static final int title_activity_event_details=0x7f070011;
+        public static final int title_activity_main=0x7f070012;
+        public static final int title_activity_splash=0x7f070013;
+        public static final int title_section1=0x7f070014;
+        public static final int title_section2=0x7f070015;
+        public static final int title_section3=0x7f070016;
     }
     public static final class style {
+        /** 
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        
+         */
+        public static final int AppBaseTheme=0x7f080000;
         /**  Customize your theme here. 
          */
-        public static final int AppTheme=0x7f080000;
-        public static final int ButtonBar=0x7f080001;
-        public static final int FullscreenTheme=0x7f080002;
-        public static final int LoginFormContainer=0x7f080003;
+        public static final int AppTheme=0x7f080001;
+        public static final int ButtonBar=0x7f080002;
+        public static final int FullscreenTheme=0x7f080003;
+        public static final int LoginFormContainer=0x7f080004;
     }
     public static final class styleable {
         /** Attributes that can be used with a GridLayout.
@@ -754,5 +785,48 @@ containing a value of this type.
           @attr name com.typee.typee:layout_rowSpan
         */
         public static final int GridLayout_Layout_layout_rowSpan = 8;
+        /** Attributes that can be used with a QuiltView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #QuiltView_childPadding com.typee.typee:childPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #QuiltView_scrollOrientation com.typee.typee:scrollOrientation}</code></td><td></td></tr>
+           </table>
+           @see #QuiltView_childPadding
+           @see #QuiltView_scrollOrientation
+         */
+        public static final int[] QuiltView = {
+            0x7f01000c, 0x7f01000d
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.typee.typee.R.attr#childPadding}
+          attribute's value can be found in the {@link #QuiltView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.typee.typee:childPadding
+        */
+        public static final int QuiltView_childPadding = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.typee.typee.R.attr#scrollOrientation}
+          attribute's value can be found in the {@link #QuiltView} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.typee.typee:scrollOrientation
+        */
+        public static final int QuiltView_scrollOrientation = 0;
     };
 }

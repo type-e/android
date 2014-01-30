@@ -6,15 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-
+import com.jake.quiltview.QuiltView;
 import com.typee.typee.R;
 import com.typee.typee.ui.base.BaseFragment;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- */
 public class EventDetailsFragment extends BaseFragment {
 
     private View rootView;
