@@ -1,4 +1,4 @@
-package com.typee.typee.ui;
+package com.typee.typee.ui.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
