@@ -33,5 +33,6 @@ dependencies {
     compile 'com.android.support:gridlayout-v7:18.0.+'
 
     compile files('libs/Parse-1.4.0.jar')
+    compile files('libs/volley_14022014.jar')
     compile project(':QuiltViewLibrary')
 }

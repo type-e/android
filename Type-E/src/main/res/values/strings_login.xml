@@ -1,0 +1,12 @@
+<resources>
+
+    <!-- Strings related to login -->
+    <string name="text_mobile_number">Mobile Number</string>
+
+    <string name="button_sign_in_register"><b>Sign in</b> or register</string>
+
+    <string name="login_progress_signing_in">Signing in&#8230;</string>
+
+    <string name="error_field_required">This field is required</string>
+    <string name="error_invalid_mobile_number">Please enter a valid mobile number</string>
+</resources>
