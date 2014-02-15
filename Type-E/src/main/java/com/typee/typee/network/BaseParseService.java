@@ -16,6 +16,38 @@ public class BaseParseService {
         return false;
     }
 
+    public static boolean setData(String tableName, HashMap columnsNameAndValues){
+        return null;
+    }
+
+    public static ParseObject setRelationalData(String tableName, HashMap columnsNameAndValues){
+
+    }
+
+    public static ParseObject setRelation(String parentColumn, ParseObject parentObject, ParseObject childObject){
+
+    }
+
+    public static boolean saveRelation(ParseObject childOject){
+
+    }
+
+    public static boolean deleteDataGeneric(String tableName, String columnToCompare, String colunmValue){
+
+    }
+
+    public static boolean deleteDataBaseOnUniqueKey(String tableName, String uniqueColumn, String uniqueKey, String columnToCompare, String columnValue){
+
+    }
+
+    public static boolean updateDataGeneric(String tableName, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
+
+    }
+
+    public static boolean updateDataBaseOnUserKey(String tableName, String uniqueColumn, String uniqueKey, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
+
+    }
+
     public static void signUp(String username, String firstName, String lastName,
                               String password, String emailAddress, int mobileNumber, int addressFK, String birthday,
                               String gender, String country) {
