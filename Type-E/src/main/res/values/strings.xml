@@ -6,4 +6,6 @@
     <string name="text_loading">Loading...</string>
     <string name="action_settings">Settings</string>
 
+    <string name="populated_token">Token (%1$s) populated! Please press \'%2$s\' to proceed</string>
+
 </resources>

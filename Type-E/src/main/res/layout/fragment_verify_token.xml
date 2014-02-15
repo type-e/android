@@ -7,11 +7,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
         <!-- Token form -->
         <ScrollView
             android:layout_width="match_parent"
@@ -23,13 +18,33 @@
                 android:padding="@dimen/activity_margin"
                 android:orientation="vertical">
 
+                <ProgressBar
+                    android:id="@+id/progress_bar_token"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"/>
+
                 <TextView
-                    android:id="@+id/registration_instruction"
+                    android:id="@+id/token_populate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="@string/token_auto_msg"
+                    android:textSize="@dimen/textsize_small"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/activity_margin"/>
+
+                <TextView
+                    android:id="@+id/token_instruction"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/token_start_msg"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/textsize_medium"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -49,7 +64,7 @@
         </ScrollView>
 
         <View
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 

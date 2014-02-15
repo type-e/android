@@ -4,9 +4,10 @@
 
     <string name="login_start_msg">Please enter your mobile number to start</string>
     <string name="token_start_msg">Please enter the token sent to your mobile number (%1$s)</string>
+    <string name="token_auto_msg">Auto populating token…</string>
 
     <string name="hint_mobile_number">eg, 91234567</string>
-    <string name="hint_token">eg, 123–888</string>
+    <string name="hint_token">eg, 888</string>
 
     <string name="button_sign_in_register"><b>Sign in</b> or register</string>
     <string name="button_resend"><b>Re-send Token</b></string>

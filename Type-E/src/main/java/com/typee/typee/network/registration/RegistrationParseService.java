@@ -1,19 +1,10 @@
 package com.typee.typee.network.registration;
 
-import android.net.Uri;
-
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.StringRequest;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
-import com.typee.typee.config.Config;
 import com.typee.typee.network.BaseParseService;
-import com.typee.typee.ui.main.MainApplication;
-import com.typee.typee.util.Util;
 
 /**
  * Created by winsonlim on 20/1/14.
@@ -28,7 +19,7 @@ public class RegistrationParseService extends BaseParseService {
 		return instance;
 	}
 
-	public static void signUp(final String mobileNumber, final RegistrationListener registrationListener) {
+	public void signUp(final String mobileNumber, final RegistrationListener registrationListener) {
 
 		if (mobileNumber == null || registrationListener == null) return;
 
@@ -54,7 +45,7 @@ public class RegistrationParseService extends BaseParseService {
 		});
 	}
 
-	public static void checkIfUserExists(final String mobileNumber, final FindUserListener findUserListener) {
+	public void checkIfUserExists(final String mobileNumber, final FindUserListener findUserListener) {
 
 		if (mobileNumber == null || findUserListener == null) return;
 
@@ -68,38 +59,5 @@ public class RegistrationParseService extends BaseParseService {
 				}
 			}
 		});
-	}
-
-	public static void sendRegistrationToken(String mobileNumber, final TokenSentListener tokenSentListener) {
-
-		if (mobileNumber == null || tokenSentListener == null) return;
-
-		final String token = Util.generateToken(mobileNumber);
-		final String message = "Type-E verification token: " + token;
-		final int languageType = 1;
-		mobileNumber = "65" + mobileNumber; // '65' is needed to force SG country code
-
-		final String requestURL = Config.SMS_API_URL + "?apiusername=" + Config.SMS_API_USERNAME + "&apipassword=" + Config.SMS_API_PASSWORD + "&mobileno=" + mobileNumber + "&senderid=" + Config.APP_NAME + "&languagetype=" + languageType + "&message=" + Uri.encode(message);
-
-		StringRequest req = new StringRequest(requestURL, new Response.Listener<String>() {
-			@Override
-			public void onResponse(String response) {
-				tokenSentListener.tokenSentSuccessful(token);
-
-				VolleyLog.v("Response:%n %s", response);
-			}
-		}, new Response.ErrorListener() {
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				tokenSentListener.tokenSentUnsuccessful();
-
-				VolleyLog.e("Error: ", error.getMessage());
-			}
-		}
-		);
-
-		// add the request object to the queue to be executed
-		MainApplication.getInstance().addToRequestQueue(req);
-
 	}
 }

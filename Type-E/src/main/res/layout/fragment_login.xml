@@ -7,11 +7,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
         <!-- Login form -->
         <ScrollView
             android:layout_width="match_parent"
@@ -23,15 +18,20 @@
                 android:padding="@dimen/activity_margin"
                 android:orientation="vertical">
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/activity_margin_large"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/login_start_msg"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/textsize_medium"/>
 
                 <View
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="@dimen/activity_margin"/>
 
@@ -48,7 +48,7 @@
         </ScrollView>
 
         <View
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 

@@ -12,9 +12,9 @@ import com.typee.typee.R;
 import com.typee.typee.network.registration.FindUserListener;
 import com.typee.typee.network.registration.RegistrationParseService;
 import com.typee.typee.network.registration.TokenSentListener;
+import com.typee.typee.network.registration.TokenService;
 import com.typee.typee.ui.base.BaseFragment;
 import com.typee.typee.ui.event.EventDetailsFragment;
-import com.typee.typee.ui.registration.RegistrationFragment;
 import com.typee.typee.util.Util;
 
 public class LoginFragment extends BaseFragment {
@@ -39,6 +39,7 @@ public class LoginFragment extends BaseFragment {
 				attemptLogin();
 			}
 		});
+
 		return inflater.inflate(R.layout.template_loading_bar, container, false);
 	}
 
@@ -100,7 +101,7 @@ public class LoginFragment extends BaseFragment {
 				@Override
 				public void userNotFound() {
 					// Call SMS Gateway API here!
-					RegistrationParseService.getParseService().sendRegistrationToken(mobileNo, new TokenSentListener() {
+					TokenService.getService().sendSMSToken(mobileNo, new TokenSentListener() {
 						@Override
 						public void tokenSentSuccessful(String token) {
 							hideLoadingIndicator();
@@ -111,7 +112,7 @@ public class LoginFragment extends BaseFragment {
 							extras.putString(ID_TOKEN, token);
 							extras.putString(ID_MOBILE, mobileNo);
 
-							Util.startActivity(getActivity(), RegistrationFragment.class.getName(), extras);
+							Util.startActivity(getActivity(), VerifyTokenFragment.class.getName(), extras);
 						}
 
 						@Override

@@ -99,8 +99,8 @@ public class BaseFragment extends Fragment {
 		}
 	}
 
-	private void hideSoftKeyboard() {
-		if (getActivity() == null) return;
+	public void hideSoftKeyboard() {
+		if (getActivity() == null || getActivity().getCurrentFocus() == null) return;
 
 		InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
 		inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);

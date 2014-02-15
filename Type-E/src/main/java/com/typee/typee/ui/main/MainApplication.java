@@ -8,12 +8,21 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
 import com.parse.Parse;
+import com.squareup.otto.Bus;
+import com.squareup.otto.ThreadEnforcer;
 
 /**
  * Created by Winson Lim on 1/26/14.
  */
 public class MainApplication extends Application {
 	public static final String TAG = "TypeEVolley";
+
+	private static Bus mEventBus;
+
+	public static Bus getEventBus() {
+		return mEventBus;
+	}
+
 
 	/**
 	 * Global request queue for Volley
@@ -32,6 +41,8 @@ public class MainApplication extends Application {
 
 		// Add your initialization code here
 		Parse.initialize(this, "mFrewsKnWGVdz9AJJHfaN7WXKxq5LAz2Mp8B8mIR", "R88iw1KmwjFuUqaOxx8qceVGkzivBiQnKuICJCvJ");
+
+		mEventBus = new Bus(ThreadEnforcer.ANY);
 
 		mRequestQueue = Volley.newRequestQueue(this);
 	}
