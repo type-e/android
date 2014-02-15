@@ -13,6 +13,7 @@ import com.parse.SignUpCallback;
 import com.typee.typee.config.Config;
 import com.typee.typee.network.BaseParseService;
 import com.typee.typee.ui.main.MainApplication;
+import com.typee.typee.util.Util;
 
 /**
  * Created by winsonlim on 20/1/14.
@@ -38,32 +39,19 @@ public class RegistrationParseService extends BaseParseService {
 		// normal ParseObject
 //		user.put("MobileNumber", mobileNumber);
 
-		// TODO: Call SMS Gateway API here!
-		sendRegistrationToken(mobileNumber, new RegistrationListener() {
-			@Override
-			public void registerSuccessful() {
-				user.signUpInBackground(new SignUpCallback() {
-					public void done(ParseException e) {
-						if (e == null) {
-							// Hooray! Let them use the app now.
-							registrationListener.registerSuccessful();
+		user.signUpInBackground(new SignUpCallback() {
+			public void done(ParseException e) {
+				if (e == null) {
+					// Hooray! Let them use the app now.
+					registrationListener.registerSuccessful();
 
-						} else {
-							// Sign up didn't succeed. Look at the ParseException
-							// to figure out what went wrong
-							registrationListener.registerUnsuccessful();
-						}
-					}
-				});
-			}
-
-			@Override
-			public void registerUnsuccessful() {
-				registrationListener.registerUnsuccessful();
+				} else {
+					// Sign up didn't succeed. Look at the ParseException
+					// to figure out what went wrong
+					registrationListener.registerUnsuccessful();
+				}
 			}
 		});
-
-
 	}
 
 	public static void checkIfUserExists(final String mobileNumber, final FindUserListener findUserListener) {
@@ -82,30 +70,28 @@ public class RegistrationParseService extends BaseParseService {
 		});
 	}
 
-	public static void sendRegistrationToken(String mobileNumber, final RegistrationListener registrationListener) {
+	public static void sendRegistrationToken(String mobileNumber, final TokenSentListener tokenSentListener) {
 
-		if (mobileNumber == null || registrationListener == null) return;
+		if (mobileNumber == null || tokenSentListener == null) return;
 
-		// TODO: include token here
-		String message = "Your mobile number " + mobileNumber + " has been registered! Here is a sample token: 123-888";
-
-		int languageType = 1;
-
+		final String token = Util.generateToken(mobileNumber);
+		final String message = "Type-E verification token: " + token;
+		final int languageType = 1;
 		mobileNumber = "65" + mobileNumber; // '65' is needed to force SG country code
 
-		final String url = Config.SMS_API_URL + "?apiusername=" + Config.SMS_API_USERNAME + "&apipassword=" + Config.SMS_API_PASSWORD + "&mobileno=" + mobileNumber + "&senderid=" + Config.APP_NAME + "&languagetype=" + languageType + "&message=" + Uri.encode(message);
+		final String requestURL = Config.SMS_API_URL + "?apiusername=" + Config.SMS_API_USERNAME + "&apipassword=" + Config.SMS_API_PASSWORD + "&mobileno=" + mobileNumber + "&senderid=" + Config.APP_NAME + "&languagetype=" + languageType + "&message=" + Uri.encode(message);
 
-		StringRequest req = new StringRequest(url, new Response.Listener<String>() {
+		StringRequest req = new StringRequest(requestURL, new Response.Listener<String>() {
 			@Override
 			public void onResponse(String response) {
-				registrationListener.registerSuccessful();
+				tokenSentListener.tokenSentSuccessful(token);
 
 				VolleyLog.v("Response:%n %s", response);
 			}
 		}, new Response.ErrorListener() {
 			@Override
 			public void onErrorResponse(VolleyError error) {
-				registrationListener.registerUnsuccessful();
+				tokenSentListener.tokenSentUnsuccessful();
 
 				VolleyLog.e("Error: ", error.getMessage());
 			}

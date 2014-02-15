@@ -1,12 +1,19 @@
 <resources>
 
     <!-- Strings related to login -->
-    <string name="text_mobile_number">Mobile Number</string>
+
+    <string name="login_start_msg">Please enter your mobile number to start</string>
+    <string name="token_start_msg">Please enter the token sent to your mobile number (%1$s)</string>
+
+    <string name="hint_mobile_number">eg, 91234567</string>
+    <string name="hint_token">eg, 123–888</string>
 
     <string name="button_sign_in_register"><b>Sign in</b> or register</string>
+    <string name="button_resend"><b>Re-send Token</b></string>
+    <string name="button_verify"><b>Verify</b></string>
 
     <string name="login_progress_signing_in">Signing in&#8230;</string>
 
-    <string name="error_field_required">This field is required</string>
+    <string name="error_field_required">Mobile number is required</string>
     <string name="error_invalid_mobile_number">Please enter a valid mobile number</string>
 </resources>

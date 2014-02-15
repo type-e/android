@@ -10,13 +10,17 @@ import android.widget.Toast;
 
 import com.typee.typee.R;
 import com.typee.typee.network.registration.FindUserListener;
-import com.typee.typee.network.registration.RegistrationListener;
 import com.typee.typee.network.registration.RegistrationParseService;
+import com.typee.typee.network.registration.TokenSentListener;
 import com.typee.typee.ui.base.BaseFragment;
 import com.typee.typee.ui.event.EventDetailsFragment;
+import com.typee.typee.ui.registration.RegistrationFragment;
 import com.typee.typee.util.Util;
 
 public class LoginFragment extends BaseFragment {
+	public static final String ID_TOKEN = "TOKEN_IDENTIFIER";
+	public static final String ID_MOBILE = "MOBILE_IDENTIFIER";
+
 	private View rootView;
 	private EditText mobileNoEditText;
 	private String mobileNo;
@@ -43,6 +47,7 @@ public class LoginFragment extends BaseFragment {
 		super.onActivityCreated(savedInstanceState);
 
 		setContentView(rootView);
+		enableAutoHideKeyboard(rootView);
 		hideLoadingIndicator();
 	}
 
@@ -94,24 +99,29 @@ public class LoginFragment extends BaseFragment {
 
 				@Override
 				public void userNotFound() {
-					// TODO: register the new account here.
-					RegistrationParseService.getParseService().signUp(mobileNo, new RegistrationListener() {
+					// Call SMS Gateway API here!
+					RegistrationParseService.getParseService().sendRegistrationToken(mobileNo, new TokenSentListener() {
 						@Override
-						public void registerSuccessful() {
+						public void tokenSentSuccessful(String token) {
 							hideLoadingIndicator();
 
 							if (getActivity() == null) return;
 
-							Toast.makeText(getActivity(), mobileNo + " registration SUCCESSFUL!", Toast.LENGTH_SHORT).show();
+							Bundle extras = new Bundle();
+							extras.putString(ID_TOKEN, token);
+							extras.putString(ID_MOBILE, mobileNo);
+
+							Util.startActivity(getActivity(), RegistrationFragment.class.getName(), extras);
 						}
 
 						@Override
-						public void registerUnsuccessful() {
+						public void tokenSentUnsuccessful() {
 							hideLoadingIndicator();
 
 							if (getActivity() == null) return;
 
-							Toast.makeText(getActivity(), mobileNo + " registration FAILED!", Toast.LENGTH_SHORT).show();
+							mobileNoEditText.setError(getString(R.string.error_invalid_mobile_number));
+							mobileNoEditText.requestFocus();
 						}
 					});
 				}

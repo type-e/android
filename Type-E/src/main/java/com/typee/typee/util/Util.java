@@ -2,6 +2,7 @@ package com.typee.typee.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.typee.typee.ui.base.BaseActivity;
 
@@ -11,10 +12,30 @@ import com.typee.typee.ui.base.BaseActivity;
 public class Util {
 	public static final String FRAGMENT_CLASS_NAME = "FRAGMENT_CLASS_NAME";
 
+	/**
+	 * Checks if String is NULL or empty, after .trim()
+	 *
+	 * @param str String to be checked
+	 * @return True if NULL/isEmpty(); Else false;
+	 */
 	public static boolean isNullOrEmpty(String str) {
 		return (str == null || "".equals(str.trim()));
 	}
 
+	public static String generateToken(String mobileNo) {
+		String mobileLast3 = mobileNo.substring(mobileNo.length() - 3);
+
+		String token = "" + System.currentTimeMillis() % 1000;
+
+		return token;
+	}
+
+	/**
+	 * Verify that this is a Singapore Mobile Number
+	 *
+	 * @param mobileNo Mobile Number
+	 * @return True if this is a Singapore Mobile Number; Else false;
+	 */
 	public static boolean verifySingaporeMobileNo(String mobileNo) {
 
 		if (!isNullOrEmpty(mobileNo)) {
@@ -28,6 +49,12 @@ public class Util {
 		return false;
 	}
 
+	/**
+	 * Remove all non-numerical characters.
+	 *
+	 * @param mobileNo String to be trimmed
+	 * @return A string which only contain all numerical values (No re-arranging)
+	 */
 	public static String trimMobileNo(String mobileNo) {
 
 		if (!isNullOrEmpty(mobileNo)) {
@@ -46,14 +73,39 @@ public class Util {
 		return mobileNo;
 	}
 
-	public static void startActivity(Context context, String className) {
+	/**
+	 * Start an activity with the Fragment.class.getName()
+	 *
+	 * @param context           Context of this activity
+	 * @param fragmentClassName Fragment.class.getName() of the fragment
+	 */
+	public static void startActivity(Context context, String fragmentClassName) {
 
-		if (context == null || isNullOrEmpty(className)) return;
+		if (context == null || isNullOrEmpty(fragmentClassName)) return;
 
 		Intent openFragmentInActivityIntent = new Intent(context, BaseActivity.class);
-		openFragmentInActivityIntent.putExtra(FRAGMENT_CLASS_NAME, className);
+		openFragmentInActivityIntent.putExtra(FRAGMENT_CLASS_NAME, fragmentClassName);
 
 		context.startActivity(openFragmentInActivityIntent);
 	}
 
+	/**
+	 * Starts an activity with the fragment's class name passed
+	 *
+	 * @param context           Context of this activity
+	 * @param fragmentClassName Fragment.class.getName() of the fragment
+	 * @param extras            bundle to be passed to new fragment
+	 */
+	public static void startActivity(Context context, String fragmentClassName, Bundle extras) {
+		if (extras == null) {
+			startActivity(context, fragmentClassName);
+			return;
+		}
+
+		Intent openFragmentInActivityIntent = new Intent(context, BaseActivity.class);
+		openFragmentInActivityIntent.putExtra(FRAGMENT_CLASS_NAME, fragmentClassName);
+		openFragmentInActivityIntent.putExtras(extras);
+
+		context.startActivity(openFragmentInActivityIntent);
+	}
 }

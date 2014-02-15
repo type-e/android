@@ -3,4 +3,5 @@
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="activity_margin_large">32dp</dimen>
 
+    <dimen name="button_text_buffer">32dp</dimen>
 </resources>

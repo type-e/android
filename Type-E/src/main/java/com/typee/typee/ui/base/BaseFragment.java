@@ -1,11 +1,17 @@
 package com.typee.typee.ui.base;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.typee.typee.R;
@@ -20,6 +26,8 @@ import com.typee.typee.R;
 public class BaseFragment extends Fragment {
 	public final String TAG = this.getClass().getSimpleName();
 
+	private boolean isDisplayHomeAsUpEnabled = false;
+
 	private View mProgressContainer;
 	private View mContentContainer;
 	private View mContentView;
@@ -27,7 +35,15 @@ public class BaseFragment extends Fragment {
 	private boolean mContentShown;
 	private boolean mIsContentEmpty;
 
+
 	public BaseFragment() {
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setHasOptionsMenu(true);
 	}
 
 	@Override
@@ -58,18 +74,94 @@ public class BaseFragment extends Fragment {
 	}
 
 	/**
-	 * set title of the actionbar
+	 * Enable the auto hiding of soft keyboard when background is touched
+	 *
+	 * @param view The root view of the activity
+	 */
+	public void enableAutoHideKeyboard(View view) {
+		//Set up touch listener for non-text box views to hide keyboard.
+		if (!(view instanceof EditText)) {
+			view.setOnTouchListener(new View.OnTouchListener() {
+				public boolean onTouch(View v, MotionEvent event) {
+					hideSoftKeyboard();
+					return false;
+				}
+			});
+		}
+
+		//If a layout container, iterate over children and seed recursion.
+		if (view instanceof ViewGroup) {
+			for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+				View innerView = ((ViewGroup) view).getChildAt(i);
+
+				enableAutoHideKeyboard(innerView);
+			}
+		}
+	}
+
+	private void hideSoftKeyboard() {
+		if (getActivity() == null) return;
+
+		InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+		inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+	}
+
+	/**
+	 * Set title of the actionbar
 	 *
 	 * @param title Title of the action bar
 	 */
 	public void setTitle(String title) {
-		getActivity().getActionBar().setTitle(title);
+		if (getActivity() != null && getActivity().getActionBar() != null) getActivity().getActionBar().setTitle(title);
 	}
 
+	/**
+	 * Finish the current activity
+	 */
 	public void finish() {
-		getActivity().finish();
+		if (getActivity() != null) getActivity().finish();
 	}
 
+	/**
+	 * Get bundle from activity's intent
+	 *
+	 * @return bundle of activity's intent
+	 */
+	public Bundle getExtras() {
+		if (getActivity() != null && getActivity().getIntent() != null) return getActivity().getIntent().getExtras();
+
+		return null;
+	}
+
+	/**
+	 * Set Home on action bar to be 'up'
+	 *
+	 * @param setAsEnabled True to set home button as up action; Else false
+	 */
+	public void setDisplayHomeAsUpEnabled(boolean setAsEnabled) {
+		this.isDisplayHomeAsUpEnabled = setAsEnabled;
+
+		if (getActivity() != null) {
+			ActionBar actionBar = getActivity().getActionBar();
+			if (actionBar != null) {
+				actionBar.setDisplayHomeAsUpEnabled(setAsEnabled);
+				if (setAsEnabled) actionBar.setTitle("");
+			}
+		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case android.R.id.home:
+				if (this.isDisplayHomeAsUpEnabled) {
+					finish();
+					return true;
+				}
+		}
+
+		return super.onOptionsItemSelected(item);
+	}
 
 	/************************************************************************
 	 *                                                                      *
@@ -320,6 +412,11 @@ public class BaseFragment extends Fragment {
 		if (mContentContainer != null && mProgressContainer != null) {
 			return;
 		}
+
+		if (getActivity() == null) {
+			throw new NullPointerException("Activity has been finished");
+		}
+
 		View root = getView();
 		if (root == null) {
 			throw new IllegalStateException("Content view not yet created");
