@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -29,6 +30,7 @@ public class VerifyTokenFragment extends BaseFragment {
 
 	private View rootView;
 	private TextView tokenInstruction;
+	private TextView tokenAutoPopulating;
 	private EditText tokenEditText;
 	private Button verifyButton;
 	private ProgressBar tokenProgressBar;
@@ -55,6 +57,8 @@ public class VerifyTokenFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		rootView = inflater.inflate(R.layout.fragment_verify_token, container, false);
+
+		tokenAutoPopulating = (TextView) rootView.findViewById(R.id.token_populate);
 
 		tokenInstruction = (TextView) rootView.findViewById(R.id.token_instruction);
 
@@ -166,12 +170,21 @@ public class VerifyTokenFragment extends BaseFragment {
 	}
 
 	private void populateToken(String token) {
-
 		if (getActivity() != null) {
-			tokenEditText.setText(token);
-
 			stopCountdown();
-			tokenProgressBar.setProgress(0);
+
+			if (tokenEditText != null) tokenEditText.setText(token);
+
+			if (tokenProgressBar != null) tokenProgressBar.setProgress(0);
+
+			if (tokenAutoPopulating != null) {
+				AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f);
+				fadeOut.setDuration(1200);
+				fadeOut.setFillAfter(true);
+				tokenAutoPopulating.startAnimation(fadeOut);
+
+				tokenAutoPopulating.setVisibility(View.INVISIBLE);
+			}
 
 			Toast.makeText(getActivity(), String.format(getString(R.string.populated_token), token, verifyButton.getText().toString()), Toast.LENGTH_LONG).show();
 
@@ -185,11 +198,11 @@ public class VerifyTokenFragment extends BaseFragment {
 	}
 
 	private void startCountdown() {
-		mStatusChecker.run();
+		if (mStatusChecker != null) mStatusChecker.run();
 	}
 
 	private void stopCountdown() {
-		handler.removeCallbacks(mStatusChecker);
+		if (handler != null && mStatusChecker != null) handler.removeCallbacks(mStatusChecker);
 	}
 
 	private Runnable mStatusChecker = new Runnable() {
@@ -201,7 +214,8 @@ public class VerifyTokenFragment extends BaseFragment {
 				if (SMSTimeOutHandler.getTimer().isCountdownRunning()) {
 					handler.postDelayed(mStatusChecker, 1000);
 				} else {
-					tokenInstruction.setVisibility(View.VISIBLE);
+					tokenAutoPopulating.setVisibility(View.INVISIBLE);
+
 					Toast.makeText(getActivity(), "Please check your SMS inbox for the token. If no SMS found, consider 'Resend'", Toast.LENGTH_LONG).show();
 				}
 			}

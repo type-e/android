@@ -11,4 +11,6 @@ public class Config {
 	public static final String SMS_API_PASSWORD = "APIN7VBTHSVFJN7VBT";
 
 	public static final String SMS_API_URL = "http://gateway.onewaysms.sg:10002/api.aspx";
+
+	public static final int SMS_TOKEN_TIMEOUT = 45; // in seconds
 }
