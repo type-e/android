@@ -4,8 +4,10 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
-import com.parse.SignUpCallback;
+// import com.parse.SignUpCallback;
 import com.parse.SaveCallback;
+import com.parse.GetCallback;
+import com.parse.FindCallback;
 import java.util.*;
 
 public class BaseParseService {
@@ -61,8 +63,22 @@ public class BaseParseService {
 
     }
 
-    public boolean deleteDataGeneric(String tableName, String columnToCompare, String colunmValue){
+    public boolean deleteData(String tableName, String columnToCompare, String colunmValue)
+    {
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("tableName", tableName);
+        params.put("columnName", columnToCompare);
+        params.put("columnValue", colunmValue);
 
+        ParseCloud.callFunctionInBackground("deleteRecordInTable", params, new FunctionCallback<String>() {
+            public void done(String object, ParseException e) {
+                if (e == null) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
     }
 
     public boolean deleteDataBaseOnUniqueKey(String tableName, String uniqueColumn, String uniqueKey, String columnToCompare, String columnValue){
@@ -76,41 +92,7 @@ public class BaseParseService {
     public boolean updateDataBaseOnUserKey(String tableName, String uniqueColumn, String uniqueKey, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
 
     }
-/*
-    public void signUp(String firstName, String lastName, String emailAddress, int addressFK, String birthday, String gender, String country, BaseParseListener baseParseListener) {
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
-          // do stuff with the user
-        } else {
-          // show the signup or login screen
-        }
-
-        ParseUser user = new ParseUser();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(emailAddress);
-
-        // normal ParseObject
-        user.put("FirstName", firstName);
-        user.put("LastName", lastName);
-        user.put("MobileNumber", mobileNumber);
-        user.put("AddressFK", addressFK);
-        user.put("Birthday", birthday);
-        user.put("Gender", gender);
-        user.put("Country", country);
-
-        user.signUpInBackground(new SignUpCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    baseParseListener.successful();
-                } else {
-                    baseParseListener.unsuccessful();
-                }
-            }
-        });
-    }
-*/
     public boolean logout() {
         ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser();
@@ -132,35 +114,51 @@ public class BaseParseService {
             }
         });
     }
-
+    /*
+    //NOT NEEDED
+    public boolean changePassword(final String username, final String password, final String newPassword, BaseParseListener baseParseListener){
+        ParseUser user = ParseUser.logIn(username, password);
+        user.setPassword(newPassword); 
+        user.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Success!
+                    baseParseListener.successful();
+                } else {
+                    // Failure!; connetion error probably
+                    baseParseListener.unsuccessful();
+                }
+            }
+        });
+    }
+    */
     public void resetPassword(String email, BaseParseListener baseParseListener) {
-        ParseUser.requestPasswordResetInBackground(email,
-                new RequestPasswordResetCallback() {
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            this.successful();
-                        } else {
-                            this.unsuccessful();
-                        }
-                    }
-                });
+        ParseUser.requestPasswordResetInBackground(email, new RequestPasswordResetCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    baseParseListener.successful();
+                } else {
+                    baseParseListener.unsuccessful();
+                }
+            }
+        });
     }
 
-    //	private void removeAccount(int username){
-    //		final ParseQuery<ParseObject> query = ParseQuery.getQuery("UserInformations");
+    //  private void removeAccount(int username){
+    //      final ParseQuery<ParseObject> query = ParseQuery.getQuery("UserInformations");
     //
-    //		query.whereEqualTo("Username", username);
-    //		// Retrieve the object by id
-    //		query.findInBackground(new FindCallback<ParseObject>() {
-    //			public void done(List<ParseObject> queryData, ParseException e) {
-    //				if (e == null) {
-    //					//only one result is expected to return
-    //					queryData.get(0).deleteInBackground();
-    //		        } else {
-    //		            Log.d("score", "Error: " + e.getMessage());
-    //		        }
-    //		    }
-    //		});
+    //      query.whereEqualTo("Username", username);
+    //      // Retrieve the object by id
+    //      query.findInBackground(new FindCallback<ParseObject>() {
+    //          public void done(List<ParseObject> queryData, ParseException e) {
+    //              if (e == null) {
+    //                  //only one result is expected to return
+    //                  queryData.get(0).deleteInBackground();
+    //              } else {
+    //                  Log.d("score", "Error: " + e.getMessage());
+    //              }
+    //          }
+    //      });
     //
-    //	}
+    //  }
 }
