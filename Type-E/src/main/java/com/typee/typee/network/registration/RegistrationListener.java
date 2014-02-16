@@ -8,4 +8,8 @@ public interface RegistrationListener {
 	public void registerSuccessful();
 
 	public void registerUnsuccessful();
+
+	public void setUserDetailsSuccessful();
+
+	public void setUserDetailsUnsuccessful();
 }
