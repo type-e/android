@@ -42,8 +42,17 @@ public class BaseParseService {
         });
     }
 
-    public ParseObject setRelationalData(String tableName, HashMap columnsNameAndValues){
-
+    public ParseObject setRelationalData(String tableName, HashMap columnsNameAndValuesHM, BaseParseListener baseParseListener)
+    {
+        ParseObject parseTable = new ParseObject(tableName);
+        
+        Set set = columnsNameAndValuesHM.entrySet();
+        Iterator  i = set.iterator();
+        while(i.hasNext()){
+            Map.Entry entry = (Map.Entry)i.next();
+            parseTable.put(entry.getKey(), entry.getValue());
+        }
+        return parseTable;
     }
 
     public ParseObject setRelation(String parentColumn, ParseObject parentObject, ParseObject childObject){
@@ -69,10 +78,15 @@ public class BaseParseService {
     public boolean updateDataBaseOnUserKey(String tableName, String uniqueColumn, String uniqueKey, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
 
     }
+/*
+    public void signUp(String firstName, String lastName, String emailAddress, int addressFK, String birthday, String gender, String country, BaseParseListener baseParseListener) {
 
-    public void signUp(String username, String firstName, String lastName,
-                              String password, String emailAddress, int addressFK, String birthday,
-                              String gender, String country, BaseParseListener baseParseListener) {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+          // do stuff with the user
+        } else {
+          // show the signup or login screen
+        }
 
         ParseUser user = new ParseUser();
         user.setUsername(username);
@@ -98,7 +112,7 @@ public class BaseParseService {
             }
         });
     }
-
+*/
     public boolean logout() {
         ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser();
