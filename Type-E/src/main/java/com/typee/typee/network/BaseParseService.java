@@ -17,16 +17,21 @@ public class BaseParseService {
         return instance;
     }
 
-    public boolean setData(String tableName, HashMap columnsNameAndValuesHM, BaseParseListener baseParseListener)
+    private ParseObject initParseTable(ParseObject parseTable, HashMap columnsNameAndValuesHM)
     {
-        ParseObject parseTable = new ParseObject(tableName);
-        
         Set set = columnsNameAndValuesHM.entrySet();
         Iterator  i = set.iterator();
         while(i.hasNext()){
             Map.Entry entry = (Map.Entry)i.next();
             parseTable.put(entry.getKey(), entry.getValue());
         }
+        return parseTable;
+    }
+
+    public boolean setData(String tableName, HashMap columnsNameAndValuesHM, BaseParseListener baseParseListener)
+    {
+        ParseObject parseTable = new ParseObject(tableName);
+        parseTable = initParseTable(parseTable, columnsNameAndValuesHM);
 
         parseTable.saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
@@ -45,14 +50,7 @@ public class BaseParseService {
     public ParseObject setRelationalData(String tableName, HashMap columnsNameAndValuesHM, BaseParseListener baseParseListener)
     {
         ParseObject parseTable = new ParseObject(tableName);
-        
-        Set set = columnsNameAndValuesHM.entrySet();
-        Iterator  i = set.iterator();
-        while(i.hasNext()){
-            Map.Entry entry = (Map.Entry)i.next();
-            parseTable.put(entry.getKey(), entry.getValue());
-        }
-        return parseTable;
+        return initParseTable(parseTable, columnsNameAndValuesHM);
     }
 
     public ParseObject setRelation(String parentColumn, ParseObject parentObject, ParseObject childObject){
