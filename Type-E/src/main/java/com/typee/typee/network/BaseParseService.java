@@ -30,7 +30,7 @@ public class BaseParseService {
         return parseTable;
     }
 
-    public boolean setData(String tableName, HashMap columnsNameAndValuesHM, BaseParseListener baseParseListener)
+    public boolean setData(String tableName, HashMap columnsNameAndValuesHM)
     {
         ParseObject parseTable = new ParseObject(tableName);
         parseTable = initParseTable(parseTable, columnsNameAndValuesHM);
@@ -39,11 +39,11 @@ public class BaseParseService {
             public void done(ParseException e) {
                 if (e == null) {
                     // Success!
-                    baseParseListener.successful();
+                    return true;
 
                 } else {
                     // Failure!; connetion error probably
-                    baseParseListener.unsuccessful();
+                    return false;
                 }
             }
         });
