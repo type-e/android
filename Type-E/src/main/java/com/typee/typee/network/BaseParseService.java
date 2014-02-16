@@ -30,7 +30,7 @@ public class BaseParseService {
         return parseTable;
     }
 
-    public boolean setData(String tableName, HashMap columnsNameAndValuesHM)
+    public boolean setData(String tableName, HashMap columnsNameAndValuesHM, BaseParseListener baseParseListener))
     {
         ParseObject parseTable = new ParseObject(tableName);
         parseTable = initParseTable(parseTable, columnsNameAndValuesHM);
@@ -39,11 +39,11 @@ public class BaseParseService {
             public void done(ParseException e) {
                 if (e == null) {
                     // Success!
-                    return true;
+                    baseParseListener.successful();
 
                 } else {
                     // Failure!; connetion error probably
-                    return false;
+                    baseParseListener.unsuccessful();
                 }
             }
         });
@@ -63,7 +63,7 @@ public class BaseParseService {
 
     }
 
-    public boolean deleteData(String tableName, String columnToCompare, String colunmValue)
+    public boolean deleteData(String tableName, String columnToCompare, String colunmValue, BaseParseListener baseParseListener)
     {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("tableName", tableName);
@@ -73,9 +73,9 @@ public class BaseParseService {
         ParseCloud.callFunctionInBackground("deleteRecordInTable", params, new FunctionCallback<String>() {
             public void done(String object, ParseException e) {
                 if (e == null) {
-                    return true;
+                    baseParseListener.successful();
                 } else {
-                    return false;
+                    baseParseListener.unsuccessful();
                 }
             }
         });
