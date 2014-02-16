@@ -10,6 +10,7 @@ import com.android.volley.toolbox.Volley;
 import com.parse.Parse;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
+import com.typee.typee.config.Config;
 
 /**
  * Created by Winson Lim on 1/26/14.
@@ -40,7 +41,7 @@ public class MainApplication extends Application {
 		sInstance = this;
 
 		// Add your initialization code here
-		Parse.initialize(this, "mFrewsKnWGVdz9AJJHfaN7WXKxq5LAz2Mp8B8mIR", "R88iw1KmwjFuUqaOxx8qceVGkzivBiQnKuICJCvJ");
+		Parse.initialize(this, Config.PARSE_APPID, Config.PARSE_CLIENT_KEY);
 
 		mEventBus = new Bus(ThreadEnforcer.ANY);
 

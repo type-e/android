@@ -5,52 +5,74 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
 import com.parse.SignUpCallback;
+import com.parse.SaveCallback;
+import java.util.*;
 
 public class BaseParseService {
 
-    private static boolean successfulSignUp() {
-        return true;
+    public static BaseParseService getBaseParseService() {
+        if (instance == null)
+            instance = new BaseParseService();
+
+        return instance;
     }
 
-    private static boolean unsuccessfulSignUp() {
-        return false;
+    public boolean setData(String tableName, HashMap columnsNameAndValuesHM, BaseParseListener baseParseListener)
+    {
+        ParseObject parseTable = new ParseObject(tableName);
+        
+        Set set = columnsNameAndValuesHM.entrySet();
+        Iterator  i = set.iterator();
+        while(i.hasNext()){
+            Map.Entry entry = (Map.Entry)i.next();
+            parseTable.put(entry.getKey(), entry.getValue());
+        }
+
+        parseTable.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Success!
+                    baseParseListener.successful();
+
+                } else {
+                    // Failure!; connetion error probably
+                    baseParseListener.unsuccessful();
+                }
+            }
+        });
     }
 
-    public static boolean setData(String tableName, HashMap columnsNameAndValues){
-        return null;
-    }
-
-    public static ParseObject setRelationalData(String tableName, HashMap columnsNameAndValues){
-
-    }
-
-    public static ParseObject setRelation(String parentColumn, ParseObject parentObject, ParseObject childObject){
-
-    }
-
-    public static boolean saveRelation(ParseObject childOject){
-
-    }
-
-    public static boolean deleteDataGeneric(String tableName, String columnToCompare, String colunmValue){
-
-    }
-
-    public static boolean deleteDataBaseOnUniqueKey(String tableName, String uniqueColumn, String uniqueKey, String columnToCompare, String columnValue){
-
-    }
-
-    public static boolean updateDataGeneric(String tableName, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
-
-    }
-
-    public static boolean updateDataBaseOnUserKey(String tableName, String uniqueColumn, String uniqueKey, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
+    public ParseObject setRelationalData(String tableName, HashMap columnsNameAndValues){
 
     }
 
-    public static void signUp(String username, String firstName, String lastName,
-                              String password, String emailAddress, int mobileNumber, int addressFK, String birthday,
-                              String gender, String country) {
+    public ParseObject setRelation(String parentColumn, ParseObject parentObject, ParseObject childObject){
+
+    }
+
+    public boolean saveRelation(ParseObject childOject){
+
+    }
+
+    public boolean deleteDataGeneric(String tableName, String columnToCompare, String colunmValue){
+
+    }
+
+    public boolean deleteDataBaseOnUniqueKey(String tableName, String uniqueColumn, String uniqueKey, String columnToCompare, String columnValue){
+
+    }
+
+    public boolean updateDataGeneric(String tableName, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
+
+    }
+
+    public boolean updateDataBaseOnUserKey(String tableName, String uniqueColumn, String uniqueKey, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
+
+    }
+
+    public void signUp(String username, String firstName, String lastName,
+                              String password, String emailAddress, int addressFK, String birthday,
+                              String gender, String country, BaseParseListener baseParseListener) {
 
         ParseUser user = new ParseUser();
         user.setUsername(username);
@@ -69,15 +91,15 @@ public class BaseParseService {
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    successfulSignUp();
+                    baseParseListener.successful();
                 } else {
-                    unsuccessfulSignUp();
+                    baseParseListener.unsuccessful();
                 }
             }
         });
     }
 
-    public static boolean logout() {
+    public boolean logout() {
         ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser == null) {
@@ -87,32 +109,32 @@ public class BaseParseService {
         }
     }
 
-    public static void login(String username, String password) {
+    public void login(String username, String password, BaseParseListener baseParseListener) {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
-                    successfulSignUp();
+                    baseParseListener.successful();
                 } else {
-                    unsuccessfulSignUp();
+                    baseParseListener.unsuccessful();
                 }
             }
         });
     }
 
-    public static void resetPassword(String email) {
+    public void resetPassword(String email, BaseParseListener baseParseListener) {
         ParseUser.requestPasswordResetInBackground(email,
                 new RequestPasswordResetCallback() {
                     public void done(ParseException e) {
                         if (e == null) {
-                            successfulSignUp();
+                            this.successful();
                         } else {
-                            unsuccessfulSignUp();
+                            this.unsuccessful();
                         }
                     }
                 });
     }
 
-    //	private static void removeAccount(int username){
+    //	private void removeAccount(int username){
     //		final ParseQuery<ParseObject> query = ParseQuery.getQuery("UserInformations");
     //
     //		query.whereEqualTo("Username", username);
