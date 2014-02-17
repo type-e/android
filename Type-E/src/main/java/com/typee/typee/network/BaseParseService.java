@@ -1,17 +1,11 @@
 package com.typee.typee.network;
 
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.RequestPasswordResetCallback;
-// import com.parse.SignUpCallback;
-import com.parse.SaveCallback;
-import com.parse.GetCallback;
-import com.parse.FindCallback;
+import com.parse.*;
 import java.util.*;
 
-public class BaseParseService {
+public class BaseParseService{
 
+    private static BaseParseService instance;
     public static BaseParseService getBaseParseService() {
         if (instance == null)
             instance = new BaseParseService();
@@ -25,72 +19,59 @@ public class BaseParseService {
         Iterator  i = set.iterator();
         while(i.hasNext()){
             Map.Entry entry = (Map.Entry)i.next();
-            parseTable.put(entry.getKey(), entry.getValue());
+            parseTable.put((String)entry.getKey(), entry.getValue());
         }
         return parseTable;
     }
 
-    public boolean setData(String tableName, HashMap columnsNameAndValuesHM, BaseParseListener baseParseListener))
-    {
+    public void setData(String tableName, HashMap columnsNameAndValuesHM) throws ParseException {
         ParseObject parseTable = new ParseObject(tableName);
         parseTable = initParseTable(parseTable, columnsNameAndValuesHM);
-
-        parseTable.saveInBackground(new SaveCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    // Success!
-                    baseParseListener.successful();
-
-                } else {
-                    // Failure!; connetion error probably
-                    baseParseListener.unsuccessful();
-                }
-            }
-        });
+        parseTable.save();
     }
 
-    public ParseObject setRelationalData(String tableName, HashMap columnsNameAndValuesHM, BaseParseListener baseParseListener)
+    public ParseObject setRelationalData(String tableName, HashMap columnsNameAndValuesHM)
     {
         ParseObject parseTable = new ParseObject(tableName);
         return initParseTable(parseTable, columnsNameAndValuesHM);
     }
 
     public ParseObject setRelation(String parentColumn, ParseObject parentObject, ParseObject childObject){
+        return null;
+    }
+
+    public void saveRelation(ParseObject childObject){
 
     }
 
-    public boolean saveRelation(ParseObject childOject){
-
-    }
-
-    public boolean deleteData(String tableName, String columnToCompare, String colunmValue, BaseParseListener baseParseListener)
-    {
+    public void deleteData(String tableName, String columnToCompare, String columnValue) throws ParseException {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("tableName", tableName);
         params.put("columnName", columnToCompare);
-        params.put("columnValue", colunmValue);
+        params.put("columnValue", columnValue);
 
-        ParseCloud.callFunctionInBackground("deleteRecordInTable", params, new FunctionCallback<String>() {
-            public void done(String object, ParseException e) {
-                if (e == null) {
-                    baseParseListener.successful();
-                } else {
-                    baseParseListener.unsuccessful();
-                }
-            }
-        });
+        ParseCloud.callFunction("deleteRecordInTable", params);
+
+//        ParseCloud.callFunctionInBackground("deleteRecordInTable", params, new FunctionCallback<String>() {
+//            public void done(String object, ParseException e) {
+//                if (e == null) {
+//                    baseParseListener.successful(e);
+//                } else {
+//                    baseParseListener.unsuccessful(e);
+//                }
+//            }
+//        });
     }
 
-    public boolean deleteDataBaseOnUniqueKey(String tableName, String uniqueColumn, String uniqueKey, String columnToCompare, String columnValue){
+    public void updateColumnValue(String tableName, String columnToUpdate, String updateValue, String columnToCompare, String columnValue) throws ParseException {
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("tableName", tableName);
+        params.put("columnName", columnToCompare);
+        params.put("columnValue", columnValue);
+        params.put("updateColumn", columnToUpdate);
+        params.put("updateValue", updateValue);
 
-    }
-
-    public boolean updateDataGeneric(String tableName, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
-
-    }
-
-    public boolean updateDataBaseOnUserKey(String tableName, String uniqueColumn, String uniqueKey, String columnToUpdate, String updateValue, String columnToCompare, String colunmValue){
-
+        ParseCloud.callFunction("updateRecordInTable", params);
     }
 
     public boolean logout() {
@@ -103,13 +84,13 @@ public class BaseParseService {
         }
     }
 
-    public void login(String username, String password, BaseParseListener baseParseListener) {
+    public void login(String username, String password, final BaseParseListener baseParseListener) {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
                     baseParseListener.successful();
                 } else {
-                    baseParseListener.unsuccessful();
+                    baseParseListener.unsuccessful(e);
                 }
             }
         });
@@ -132,13 +113,13 @@ public class BaseParseService {
         });
     }
     */
-    public void resetPassword(String email, BaseParseListener baseParseListener) {
+    public void resetPassword(String email, final BaseParseListener baseParseListener) {
         ParseUser.requestPasswordResetInBackground(email, new RequestPasswordResetCallback() {
             public void done(ParseException e) {
                 if (e == null) {
                     baseParseListener.successful();
                 } else {
-                    baseParseListener.unsuccessful();
+                    baseParseListener. unsuccessful(e);
                 }
             }
         });

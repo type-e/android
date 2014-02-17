@@ -1,10 +1,6 @@
 package com.typee.typee.network.registration;
 
-import com.parse.LogInCallback;
-import com.parse.ParseException;
-import com.parse.ParseUser;
-import com.parse.SignUpCallback;
-import com.parse.SaveCallback;
+import com.parse.*;
 import com.typee.typee.network.BaseParseService;
 
 /**
@@ -56,7 +52,7 @@ public class RegistrationParseService extends BaseParseService {
         	// normal ParseObject
 	        currentUser.put("FirstName", firstName);
 	        currentUser.put("LastName", lastName);
-	        currentUser.put("MobileNumber", mobileNumber);
+//	        currentUser.put("MobileNumber", mobileNumber);
 	        currentUser.put("AddressFK", addressFK);
 	        currentUser.put("Birthday", birthday);
 	        currentUser.put("Gender", gender);
@@ -69,11 +65,29 @@ public class RegistrationParseService extends BaseParseService {
             public void done(ParseException e) {
                 if (e == null) {
                     // Success!
-                    registrationListener.setUserDetailsSuccessful();
+//                    registrationListener.setUserDetailsSuccessful();
 
                 } else {
                     // Failure!; connetion error probably
-                    registrationListener.setUserDetailsUnsuccessful();
+//                    registrationListener.setUserDetailsUnsuccessful();
+                }
+            }
+        });
+    }
+
+    public void createUserTable(String username)
+    {
+    	ParseObject parseTable = new ParseObject(username);
+
+    	parseTable.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    // Success!
+//                    registrationListener.registerSuccessful();
+
+                } else {
+                    // Failure!; connetion error probably
+//                    registrationListener.registerUnsuccessful();
                 }
             }
         });
