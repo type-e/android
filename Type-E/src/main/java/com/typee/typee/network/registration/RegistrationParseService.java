@@ -43,7 +43,7 @@ public class RegistrationParseService extends BaseParseService {
 	}
 
 	//call parse cloud
-	public void setUserDetails(final String firstName, final String lastName, final String emailAddress, final int addressFK, final String birthday, final String gender, final String country, final RegistrationListener registrationListener) {
+	public void setUserDetails(final String firstName, final String lastName, final String nickname, final String emailAddress, final int addressFK, final String birthday, final String gender, final String country, final RegistrationListener registrationListener) throws ParseException {
 
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
@@ -52,45 +52,16 @@ public class RegistrationParseService extends BaseParseService {
         	// normal ParseObject
 	        currentUser.put("FirstName", firstName);
 	        currentUser.put("LastName", lastName);
-//	        currentUser.put("MobileNumber", mobileNumber);
+	        currentUser.put("Nickname", nickname);
 	        currentUser.put("AddressFK", addressFK);
 	        currentUser.put("Birthday", birthday);
 	        currentUser.put("Gender", gender);
 	        currentUser.put("Country", country);
+
+            currentUser.save();
         } else {
         	// current user does not exists
         }
-
-        currentUser.saveInBackground(new SaveCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    // Success!
-//                    registrationListener.setUserDetailsSuccessful();
-
-                } else {
-                    // Failure!; connetion error probably
-//                    registrationListener.setUserDetailsUnsuccessful();
-                }
-            }
-        });
-    }
-
-    public void createUserTable(String username)
-    {
-    	ParseObject parseTable = new ParseObject(username);
-
-    	parseTable.saveInBackground(new SaveCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    // Success!
-//                    registrationListener.registerSuccessful();
-
-                } else {
-                    // Failure!; connetion error probably
-//                    registrationListener.registerUnsuccessful();
-                }
-            }
-        });
     }
 
 	public void checkIfUserExists(final String mobileNumber, final FindUserListener findUserListener) {

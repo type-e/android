@@ -74,6 +74,21 @@ public class BaseParseService{
         ParseCloud.callFunction("updateRecordInTable", params);
     }
 
+//    public void queryData(String tableName, String columnToQuery, String columnValueToCompare){
+//        ParseQuery<ParseObject> query = ParseQuery.getQuery(tableName);
+//        query.whereEqualTo(columnToQuery, columnValueToCompare);
+//        query.findInBackground(new FindCallback<ParseObject>() {
+//            public void done(List<ParseObject> scoreList, ParseException e) {
+//                if (e == null) {
+//                    Log.d("score", "Retrieved " + scoreList.size() + " scores");
+//                } else {
+//                    Log.d("score", "Error: " + e.getMessage());
+//                }
+//            }
+//        });
+//
+//    }
+
     public boolean logout() {
         ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser();
