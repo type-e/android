@@ -44,6 +44,11 @@ public class BaseParseService{
 
     }
 
+    public List<ParseObject> getAllTableValues(String tableName) throws ParseException {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery(tableName);
+        return query.find();
+    }
+
     public void deleteData(String tableName, String columnToCompare, String columnValue) throws ParseException {
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("tableName", tableName);
