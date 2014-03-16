@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.jake.quiltview.QuiltView;
 import com.typee.typee.R;
 import com.typee.typee.ui.base.BaseFragment;
+import com.typee.typee.util.Util;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ public class EventDetailsFragment extends BaseFragment {
 
 	private View rootView;
 	private QuiltView quiltView;
+	private Button addEvent;
 
 	public EventDetailsFragment() {
 		// Required empty public constructor
@@ -26,7 +29,9 @@ public class EventDetailsFragment extends BaseFragment {
 	                         Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		rootView = inflater.inflate(R.layout.fragment_event_details, container, false);
+
 		quiltView = (QuiltView) rootView.findViewById(R.id.event_attendee_quilt);
+		addEvent = (Button) rootView.findViewById(R.id.button_event_add);
 
 		return rootView;
 	}
@@ -39,10 +44,16 @@ public class EventDetailsFragment extends BaseFragment {
 
 		addTestQuilts(200);
 
+		addEvent.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Util.startActivity(getActivity(), AddEventFragment.class.getName());
+			}
+		});
+
 
 		// TODO: Here is how you set plurals in code
 //	    countdownUnitTextView.setText(getResources().getQuantityString(R.plurals.event_timeout_units_minutes, minutes));
-
 	}
 
 	public void addTestQuilts(int num) {
@@ -60,5 +71,9 @@ public class EventDetailsFragment extends BaseFragment {
 			images.add(image);
 		}
 		quiltView.addPatchImages(images);
+	}
+
+	private void gotoAddEvent() {
+
 	}
 }

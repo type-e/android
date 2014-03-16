@@ -1,5 +1,7 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
+    <color name="accept_event">#00ff00</color>
+    <color name="reject_event">#ff0000</color>
 
 </resources>

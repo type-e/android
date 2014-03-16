@@ -3,6 +3,29 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
+    <Button
+        android:id="@+id/button_event_add"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add event"/>
+
+    <Button
+        android:id="@+id/accept_event_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Yes"
+        android:textColor="@android:color/black"
+        android:background="@color/accept_event"/>
+
+    <Button
+        android:id="@+id/reject_event_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No"
+        android:textColor="@android:color/black"
+        android:background="@color/reject_event"/>
+
     <com.jake.quiltview.QuiltView
         android:id="@+id/event_attendee_quilt"
         android:layout_width="wrap_content"

@@ -57,16 +57,22 @@ public class VerifyTokenFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		rootView = inflater.inflate(R.layout.fragment_verify_token, container, false);
+		assert rootView != null;
 
 		tokenAutoPopulating = (TextView) rootView.findViewById(R.id.token_populate);
+		assert tokenAutoPopulating != null;
 
 		tokenInstruction = (TextView) rootView.findViewById(R.id.token_instruction);
+		assert tokenInstruction != null;
 
 		tokenEditText = (EditText) rootView.findViewById(R.id.edittext_token);
+		assert tokenEditText != null;
 
 		tokenProgressBar = (ProgressBar) rootView.findViewById(R.id.progress_bar_token);
+		assert tokenProgressBar != null;
 
 		verifyButton = (Button) rootView.findViewById(R.id.button_verify);
+		assert verifyButton != null;
 
 		return inflater.inflate(R.layout.template_loading_bar, container, false);
 	}
@@ -121,12 +127,14 @@ public class VerifyTokenFragment extends BaseFragment {
 	private void verifyToken() {
 		String typedToken = tokenEditText.getEditableText().toString();
 
+		showLoadingIndicator();
+
 		if (typedToken.equalsIgnoreCase(token)) {
 			// TODO: register the new account here.
 			RegistrationParseService.getParseService().signUp(mobileNo, new RegistrationListener() {
 				@Override
 				public void registerSuccessful() {
-
+					hideLoadingIndicator();
 					if (getActivity() == null) return;
 
 					Toast.makeText(getActivity(), mobileNo + " registered!", Toast.LENGTH_SHORT).show();
@@ -137,21 +145,24 @@ public class VerifyTokenFragment extends BaseFragment {
 
 				@Override
 				public void registerUnsuccessful() {
-
+					hideLoadingIndicator();
 					if (getActivity() == null) return;
 
 					Toast.makeText(getActivity(), mobileNo + " registration FAILED!", Toast.LENGTH_SHORT).show();
 				}
 			});
 		} else {
-			Toast.makeText(getActivity(), "This token is invalid. Please verify.", Toast.LENGTH_SHORT).show();
+			if (getActivity() != null)
+				Toast.makeText(getActivity(), "This token is invalid. Please verify.", Toast.LENGTH_SHORT).show();
 		}
 
+		hideLoadingIndicator();
 	}
 
 	private void resendToken() {
 		// TODO: resend the token
-
+		if (getActivity() != null)
+			Toast.makeText(getActivity(), "Re-send token is not done.", Toast.LENGTH_SHORT).show();
 	}
 
 	@Subscribe

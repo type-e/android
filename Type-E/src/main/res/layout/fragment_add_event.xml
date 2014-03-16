@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Event Name"
+        android:ems="10"
+        android:id="@+id/edittext_event_name"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="Event Description (multi-lines)"
+        android:ems="10"
+        android:id="@+id/edittext_event_description"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPostalAddress"
+        android:hint="Event Venue (or Postal Code)"
+        android:ems="10"
+        android:id="@+id/edittext_event_venue"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="datetime"
+        android:hint="Event DateTime (to do datetime picker)"
+        android:ems="10"
+        android:id="@+id/edittext_event_datetime"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create this event!"
+        android:id="@+id/button_event_create"/>
+
+</LinearLayout>
