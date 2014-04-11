@@ -414,7 +414,8 @@ public class BaseFragment extends Fragment {
 		}
 
 		if (getActivity() == null) {
-			throw new NullPointerException("Activity has been finished");
+			return;
+//			throw new NullPointerException("Activity has been finished");
 		}
 
 		View root = getView();

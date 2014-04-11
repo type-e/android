@@ -1,6 +1,7 @@
 package com.typee.typee.ui.main;
 
 import android.app.Application;
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -33,12 +34,12 @@ public class MainApplication extends Application {
 	/**
 	 * A singleton instance of the application class for easy access in other places
 	 */
-	private static MainApplication sInstance;
+	private static MainApplication instance;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		sInstance = this;
+		instance = this;
 
 		// Add your initialization code here
 		Parse.initialize(this, Config.PARSE_APPID, Config.PARSE_CLIENT_KEY);
@@ -52,7 +53,15 @@ public class MainApplication extends Application {
 	 * @return ApplicationController singleton instance
 	 */
 	public static synchronized MainApplication getInstance() {
-		return sInstance;
+		return instance;
+	}
+
+	/**
+	 * @return ApplicationController Context
+	 */
+	public static Context getContext() {
+		return instance;
+		// or return instance.getApplicationContext();
 	}
 
 	/**

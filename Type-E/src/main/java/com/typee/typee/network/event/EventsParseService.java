@@ -14,6 +14,10 @@ import java.util.List;
  * Created by winsonlim on 20/1/14.
  */
 public class EventsParseService extends BaseParseService {
+	private static final String eventNameKey = "eventName";
+	private static final String eventDescriptionKey = "eventDescription";
+	private static final String eventVenueKey = "eventVenue";
+	private static final String eventTimeKey = "eventTime";
 
 	private static EventsParseService instance;
 
@@ -26,13 +30,14 @@ public class EventsParseService extends BaseParseService {
 
 	public void setEvent(String eventName, String eventDescription, String eventVenue, String eventTime, String username, final EventsParseListener eventsParseListener) {
 		HashMap<String, String> eventDetails = new HashMap<String, String>();
-		eventDetails.put("Event Name", eventName);
-		eventDetails.put("Event Description", eventDescription);
-		eventDetails.put("Event Venue", eventVenue);
-		eventDetails.put("Event Time", eventTime);
+		eventDetails.put(eventNameKey, eventName);
+		eventDetails.put(eventDescriptionKey, eventDescription);
+		eventDetails.put(eventVenueKey, eventVenue);
+		eventDetails.put(eventTimeKey, eventTime);
 
 		try {
 			BaseParseService.getBaseParseService().setData(Dbconfig.eventTable, eventDetails);
+
 			eventsParseListener.successful();
 		} catch (ParseException e) {
 			eventsParseListener.unsuccessful(e);

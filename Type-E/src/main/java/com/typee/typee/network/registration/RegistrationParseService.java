@@ -70,6 +70,10 @@ public class RegistrationParseService extends BaseParseService {
 
 		ParseUser.logInInBackground(mobileNumber, mobileNumber, new LogInCallback() {
 			public void done(ParseUser user, ParseException e) {
+
+				//TODO: check for EXCEPTION.
+
+
 				if (user != null) {
 					// Hooray! The user exists in database.
 					findUserListener.userFound();
