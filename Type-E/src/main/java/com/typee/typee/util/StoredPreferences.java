@@ -8,7 +8,7 @@ import com.typee.typee.ui.main.MainApplication;
 /**
  * Created by winsonlim on 11/4/14.
  */
-public class StoredPerferences {
+public class StoredPreferences {
 	private static String appKey = "com.typee.typee";
 
 	private static String mobileNoKey = "com.typee.typee.mobileno";

@@ -34,6 +34,7 @@ public class EventsParseService extends BaseParseService {
 		eventDetails.put(eventDescriptionKey, eventDescription);
 		eventDetails.put(eventVenueKey, eventVenue);
 		eventDetails.put(eventTimeKey, eventTime);
+		eventDetails.put(usernameKey, username);
 
 		try {
 			BaseParseService.getBaseParseService().setData(Dbconfig.eventTable, eventDetails);

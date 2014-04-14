@@ -22,6 +22,7 @@ import com.typee.typee.sms.SMSTimeOutHandler;
 import com.typee.typee.ui.base.BaseFragment;
 import com.typee.typee.ui.event.EventDetailsFragment;
 import com.typee.typee.ui.main.MainApplication;
+import com.typee.typee.util.StoredPreferences;
 import com.typee.typee.util.Util;
 
 public class VerifyTokenFragment extends BaseFragment {
@@ -138,6 +139,8 @@ public class VerifyTokenFragment extends BaseFragment {
 					if (getActivity() == null) return;
 
 					Toast.makeText(getActivity(), mobileNo + " registered!", Toast.LENGTH_SHORT).show();
+
+					StoredPreferences.setMobileNo(mobileNo);
 
 					Util.startActivity(getActivity(), EventDetailsFragment.class.getName());
 					finish();

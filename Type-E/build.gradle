@@ -18,7 +18,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.0.1'
+    buildToolsVersion '19.0.3'
 
     defaultConfig {
         minSdkVersion 16
@@ -34,6 +34,9 @@ dependencies {
 
     // Otto for communications between activity, fragments, services, etc.
     compile 'com.squareup:otto:1.3.4'
+
+    // DeployGate for builds distributions
+    compile 'com.deploygate:sdk:3.1'
 
     compile files('libs/Parse-1.4.0.jar')
     compile files('libs/volley_14022014.jar')

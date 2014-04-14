@@ -14,7 +14,7 @@ import com.typee.typee.R;
 import com.typee.typee.network.event.EventsParseListener;
 import com.typee.typee.network.event.EventsParseService;
 import com.typee.typee.ui.base.BaseFragment;
-import com.typee.typee.util.StoredPerferences;
+import com.typee.typee.util.StoredPreferences;
 import com.typee.typee.util.Util;
 
 import java.util.List;
@@ -60,22 +60,24 @@ public class AddEventFragment extends BaseFragment implements EventsParseListene
 	}
 
 	private void createEvent() {
-		String username = StoredPerferences.getMobileNo();
+		String username = StoredPreferences.getMobileNo();
 
-		if (!Util.isNullOrEmpty(eventNameEditText.getText().toString())) {
-			if (!Util.isNullOrEmpty(eventDescriptionEditText.getText().toString())) {
-				if (!Util.isNullOrEmpty(eventVenueEditText.getText().toString())) {
-					if (!Util.isNullOrEmpty(eventDateTimeEditText.getText().toString())) {
+		if(!Util.isNullOrEmpty(username)) {
+			if (!Util.isNullOrEmpty(eventNameEditText.getText().toString())) {
+				if (!Util.isNullOrEmpty(eventDescriptionEditText.getText().toString())) {
+					if (!Util.isNullOrEmpty(eventVenueEditText.getText().toString())) {
+						if (!Util.isNullOrEmpty(eventDateTimeEditText.getText().toString())) {
 
-						EventsParseService.getEventsParseService().setEvent(
-								eventNameEditText.getText().toString(),
-								eventDescriptionEditText.getText().toString(),
-								eventVenueEditText.getText().toString(),
-								eventDateTimeEditText.getText().toString(),
-								username,
-								this
-						);
+							EventsParseService.getEventsParseService().setEvent(
+									eventNameEditText.getText().toString(),
+									eventDescriptionEditText.getText().toString(),
+									eventVenueEditText.getText().toString(),
+									eventDateTimeEditText.getText().toString(),
+									username,
+									this
+							);
 
+						}
 					}
 				}
 			}
@@ -85,7 +87,7 @@ public class AddEventFragment extends BaseFragment implements EventsParseListene
 	@Override
 	public void successful() {
 		Toast.makeText(getActivity(), "Successful!", Toast.LENGTH_SHORT).show();
-
+		finish();
 	}
 
 	@Override

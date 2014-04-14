@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
+import com.deploygate.sdk.DeployGate;
 import com.parse.Parse;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
@@ -40,6 +41,8 @@ public class MainApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		instance = this;
+
+		DeployGate.install(this);
 
 		// Add your initialization code here
 		Parse.initialize(this, Config.PARSE_APPID, Config.PARSE_CLIENT_KEY);

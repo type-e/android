@@ -15,6 +15,7 @@ import com.typee.typee.network.registration.TokenSentListener;
 import com.typee.typee.network.registration.TokenService;
 import com.typee.typee.ui.base.BaseFragment;
 import com.typee.typee.ui.event.EventDetailsFragment;
+import com.typee.typee.util.StoredPreferences;
 import com.typee.typee.util.Util;
 
 public class LoginFragment extends BaseFragment {
@@ -91,7 +92,9 @@ public class LoginFragment extends BaseFragment {
 
 					if (getActivity() == null) return;
 
-					Toast.makeText(getActivity(), mobileNo, Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), mobileNo + " saved!", Toast.LENGTH_SHORT).show();
+
+					StoredPreferences.setMobileNo(mobileNo);
 
 					Util.startActivity(getActivity(), EventDetailsFragment.class.getName());
 

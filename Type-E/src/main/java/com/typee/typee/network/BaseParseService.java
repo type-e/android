@@ -4,6 +4,7 @@ import com.parse.*;
 import java.util.*;
 
 public class BaseParseService{
+	public static final String usernameKey = "username";
 
     private static BaseParseService instance;
     public static BaseParseService getBaseParseService() {
@@ -119,7 +120,7 @@ public class BaseParseService{
     //NOT NEEDED
     public boolean changePassword(final String username, final String password, final String newPassword, BaseParseListener baseParseListener){
         ParseUser user = ParseUser.logIn(username, password);
-        user.setPassword(newPassword); 
+        user.setPassword(newPassword);
         user.saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
                 if (e == null) {
