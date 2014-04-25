@@ -1,45 +1,81 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:padding="@dimen/viewpager_margin">
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Event Name"
-        android:ems="10"
-        android:id="@+id/edittext_event_name"/>
+        android:orientation="vertical">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:hint="Event Description (multi-lines)"
-        android:ems="10"
-        android:id="@+id/edittext_event_description"/>
+        <!-- Add Event form -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPostalAddress"
-        android:hint="Event Venue (or Postal Code)"
-        android:ems="10"
-        android:id="@+id/edittext_event_venue"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/activity_margin"
+                android:orientation="vertical">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="datetime"
-        android:hint="Event DateTime (to do datetime picker)"
-        android:ems="10"
-        android:id="@+id/edittext_event_datetime"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/activity_margin_large"/>
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create this event!"
-        android:id="@+id/button_event_create"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Event Name"
+                    android:ems="10"
+                    android:id="@+id/edittext_event_name"/>
 
-</LinearLayout>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:hint="Event Description (multi-lines)"
+                    android:ems="10"
+                    android:id="@+id/edittext_event_description"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"
+                    android:hint="Event Venue (or Postal Code)"
+                    android:ems="10"
+                    android:id="@+id/edittext_event_venue"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="datetime"
+                    android:hint="Event DateTime (to do datetime picker)"
+                    android:ems="10"
+                    android:id="@+id/edittext_event_datetime"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_margin"
+            android:paddingLeft="@dimen/button_text_buffer"
+            android:paddingRight="@dimen/button_text_buffer"
+            android:layout_gravity="right"
+            android:text="Create this event!"
+            android:id="@+id/button_event_create"/>
+
+    </LinearLayout>
+
+</FrameLayout>

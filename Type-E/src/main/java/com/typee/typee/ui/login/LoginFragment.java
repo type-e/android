@@ -1,5 +1,6 @@
 package com.typee.typee.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.typee.typee.network.registration.TokenSentListener;
 import com.typee.typee.network.registration.TokenService;
 import com.typee.typee.ui.base.BaseFragment;
 import com.typee.typee.ui.event.EventDetailsFragment;
+import com.typee.typee.ui.main.MainActivity;
 import com.typee.typee.util.StoredPreferences;
 import com.typee.typee.util.Util;
 
@@ -96,7 +98,10 @@ public class LoginFragment extends BaseFragment {
 
 					StoredPreferences.setMobileNo(mobileNo);
 
-					Util.startActivity(getActivity(), EventDetailsFragment.class.getName());
+					Intent openFragmentInActivityIntent = new Intent(LoginFragment.this.getActivity(), MainActivity.class);
+					openFragmentInActivityIntent.putExtra(Util.FRAGMENT_CLASS_NAME, EventDetailsFragment.class.getName());
+
+					startActivity(openFragmentInActivityIntent);
 
 					finish();
 				}

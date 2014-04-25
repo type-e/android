@@ -1,7 +1,14 @@
 <resources>
 
+    <color name="background_tabs">#cdcdcd</color>
+    <color name="background_pager">#666666</color>
+    <color name="background_tab_pressed">#33cdcdcd</color>
+
     <color name="black_overlay">#66000000</color>
+
     <color name="accept_event">#00ff00</color>
     <color name="reject_event">#ff0000</color>
+
+    <color name="clear">#00000000</color>
 
 </resources>

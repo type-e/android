@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivity {
 	 * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
 	 * user interaction before hiding the system UI.
 	 */
-	private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
+	private static final int AUTO_HIDE_DELAY_MILLIS = 4000;
 	/**
 	 * Touch listener to use for in-layout UI controls to delay hiding the
 	 * system UI. This is to prevent the jarring behavior of controls going away
@@ -136,6 +136,7 @@ public class SplashActivity extends BaseActivity {
 		// while interacting with the UI.
 		loadingText = (TextView) findViewById(R.id.splash_loading);
 
+		// todo remove!!!
 		new Handler().postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -174,7 +175,7 @@ public class SplashActivity extends BaseActivity {
 
 				SplashActivity.this.finish();
 			}
-		}, 4000);
+		}, 2000);
 	}
 
 	/**

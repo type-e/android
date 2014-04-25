@@ -15,6 +15,7 @@ import com.typee.typee.util.Util;
 import java.util.ArrayList;
 
 public class EventDetailsFragment extends BaseFragment {
+	private static final String ARG_POSITION = "position";
 
 	private View rootView;
 	private QuiltView quiltView;

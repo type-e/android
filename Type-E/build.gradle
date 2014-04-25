@@ -38,6 +38,9 @@ dependencies {
     // DeployGate for builds distributions
     compile 'com.deploygate:sdk:3.1'
 
+    // For ViewPager tabs (Use till https://github.com/astuetz/PagerSlidingTabStrip/pull/83 have been merged)
+//    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+
     compile files('libs/Parse-1.4.0.jar')
     compile files('libs/volley_14022014.jar')
     compile project(':QuiltViewLibrary')

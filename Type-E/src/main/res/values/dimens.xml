@@ -1,9 +1,13 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="viewpager_margin">8dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="activity_margin_large">32dp</dimen>
 
     <dimen name="button_text_buffer">32dp</dimen>
+
+    <!-- Tabs -->
+    <dimen name="tabs_height">48dip</dimen>
 
 
     <dimen name="textsize_micro">12sp</dimen>
