@@ -24,7 +24,6 @@ public class BaseActivity extends Activity {
 				getFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
 			}
 		}
-
 	}
 
 	@Override
@@ -32,5 +31,4 @@ public class BaseActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	// todo implement sliding menu here (open / back)
 }

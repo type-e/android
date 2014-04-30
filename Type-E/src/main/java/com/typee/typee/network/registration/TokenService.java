@@ -49,8 +49,7 @@ public class TokenService {
 
 				VolleyLog.e("Error: ", error.getMessage());
 			}
-		}
-		);
+		});
 
 		// add the request object to the queue to be executed
 		MainApplication.getInstance().addToRequestQueue(req);

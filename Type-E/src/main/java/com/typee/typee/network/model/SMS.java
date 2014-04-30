@@ -1,4 +1,4 @@
-package com.typee.typee.model;
+package com.typee.typee.network.model;
 
 /**
  * Created by winsonlim on 15/2/14.
@@ -8,7 +8,6 @@ public class SMS {
 	private String message;
 
 	public SMS() {
-
 	}
 
 	public SMS(String sender, String message) {

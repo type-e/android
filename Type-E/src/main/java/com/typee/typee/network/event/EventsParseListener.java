@@ -1,17 +1,12 @@
 package com.typee.typee.network.event;
 
-import com.parse.ParseException;
-import com.parse.ParseObject;
-
-import java.util.List;
+import com.typee.typee.network.base.ErrorListener;
 
 /**
  * Created by gengxian on 2/17/14.
  */
-public interface EventsParseListener {
-    public void successful();
+public interface EventsParseListener extends ErrorListener {
 
-    public void unsuccessful(ParseException e);
+	public void successful(Object data);
 
-    public void getEventsDetailsSuccessful(List<ParseObject> resultsList);
 }

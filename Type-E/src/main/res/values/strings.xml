@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Type-E</string>
+    <string name="service_name">Data Service</string>
 
     <string name="text_loading">Loading...</string>
     <string name="action_settings">Settings</string>

@@ -28,6 +28,15 @@ public class LoginFragment extends BaseFragment {
 	private EditText mobileNoEditText;
 	private String mobileNo;
 
+	public LoginFragment() {
+		// Empty Constructor
+	}
+
+	@Override
+	public String getTitle() {
+		return null;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -98,7 +107,7 @@ public class LoginFragment extends BaseFragment {
 
 					StoredPreferences.setMobileNo(mobileNo);
 
-					Intent openFragmentInActivityIntent = new Intent(LoginFragment.this.getActivity(), MainActivity.class);
+					Intent openFragmentInActivityIntent = new Intent(getActivity(), MainActivity.class);
 					openFragmentInActivityIntent.putExtra(Util.FRAGMENT_CLASS_NAME, EventDetailsFragment.class.getName());
 
 					startActivity(openFragmentInActivityIntent);

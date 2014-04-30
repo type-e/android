@@ -1,5 +1,6 @@
 package com.typee.typee.ui.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -15,12 +16,13 @@ import android.widget.Toast;
 import com.squareup.otto.Subscribe;
 import com.typee.typee.R;
 import com.typee.typee.config.Config;
-import com.typee.typee.model.SMS;
+import com.typee.typee.network.model.SMS;
 import com.typee.typee.network.registration.RegistrationListener;
 import com.typee.typee.network.registration.RegistrationParseService;
 import com.typee.typee.sms.SMSTimeOutHandler;
 import com.typee.typee.ui.base.BaseFragment;
 import com.typee.typee.ui.event.EventDetailsFragment;
+import com.typee.typee.ui.main.MainActivity;
 import com.typee.typee.ui.main.MainApplication;
 import com.typee.typee.util.StoredPreferences;
 import com.typee.typee.util.Util;
@@ -39,7 +41,12 @@ public class VerifyTokenFragment extends BaseFragment {
 	private Handler handler = new Handler();
 
 	public VerifyTokenFragment() {
-		// Required empty public constructor
+		// Empty Constructor
+	}
+
+	@Override
+	public String getTitle() {
+		return null;
 	}
 
 	@Override
@@ -49,8 +56,10 @@ public class VerifyTokenFragment extends BaseFragment {
 
 		Bundle extras = getExtras();
 		if (extras != null) {
-			if (extras.containsKey(LoginFragment.ID_TOKEN)) token = extras.getString(LoginFragment.ID_TOKEN);
-			if (extras.containsKey(LoginFragment.ID_MOBILE)) mobileNo = extras.getString(LoginFragment.ID_MOBILE);
+			if (extras.containsKey(LoginFragment.ID_TOKEN))
+				token = extras.getString(LoginFragment.ID_TOKEN);
+			if (extras.containsKey(LoginFragment.ID_MOBILE))
+				mobileNo = extras.getString(LoginFragment.ID_MOBILE);
 		}
 	}
 
@@ -142,7 +151,11 @@ public class VerifyTokenFragment extends BaseFragment {
 
 					StoredPreferences.setMobileNo(mobileNo);
 
-					Util.startActivity(getActivity(), EventDetailsFragment.class.getName());
+					Intent openFragmentInActivityIntent = new Intent(getActivity(), MainActivity.class);
+					openFragmentInActivityIntent.putExtra(Util.FRAGMENT_CLASS_NAME, EventDetailsFragment.class.getName());
+
+					startActivity(openFragmentInActivityIntent);
+
 					finish();
 				}
 
@@ -179,7 +192,7 @@ public class VerifyTokenFragment extends BaseFragment {
 			populateToken(token);
 
 		} catch (IndexOutOfBoundsException e) {
-
+			// do nothing
 		}
 	}
 
@@ -208,7 +221,8 @@ public class VerifyTokenFragment extends BaseFragment {
 
 	private void updateTime() {
 
-		if (tokenProgressBar != null) tokenProgressBar.setProgress(SMSTimeOutHandler.getTimer().getRemainingTime());
+		if (tokenProgressBar != null)
+			tokenProgressBar.setProgress(SMSTimeOutHandler.getTimer().getRemainingTime());
 	}
 
 	private void startCountdown() {

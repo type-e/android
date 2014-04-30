@@ -1,34 +1,39 @@
 package com.typee.typee.network.model;
 
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+
 /**
- * Created by winsonlim on 16/3/14.
+ * Created by winsonlim on 28/4/14.
  */
-public class User {
-	int countryCode;
-	String mobileNumber;
-	String displayName;
+@ParseClassName("User")
+public class User extends ParseObject {
+	public static final String usernameKey = "username";
+	public static final String createdAtKey = "createdAt";
+	public static final String updatedAtKey = "updatedAt";
 
-	public int getCountryCode() {
-		return countryCode;
+	public String getUsername() {
+		return getString(usernameKey);
 	}
 
-	public void setCountryCode(int countryCode) {
-		this.countryCode = countryCode;
+	public void setUsername(String username) {
+		put(usernameKey, username);
 	}
 
-	public String getMobileNumber() {
-		return mobileNumber;
+	public java.util.Date getCreatedAt() {
+		return getDate(createdAtKey);
 	}
 
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public void setCreatedAt(String createdAt) {
+		put(createdAtKey, createdAt);
 	}
 
-	public String getDisplayName() {
-		return displayName;
+	public java.util.Date getUpdatedAt() {
+		return getDate(updatedAtKey);
 	}
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public void setUpdatedAt(String updatedAt) {
+		put(updatedAtKey, updatedAt);
 	}
+
 }

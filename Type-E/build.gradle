@@ -38,6 +38,9 @@ dependencies {
     // DeployGate for builds distributions
     compile 'com.deploygate:sdk:3.1'
 
+    // Joda-Time for managing of date time
+    compile 'net.danlew:android.joda:2.3.3'
+
     // For ViewPager tabs (Use till https://github.com/astuetz/PagerSlidingTabStrip/pull/83 have been merged)
 //    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 

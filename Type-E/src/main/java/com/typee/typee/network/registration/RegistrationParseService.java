@@ -1,7 +1,7 @@
 package com.typee.typee.network.registration;
 
 import com.parse.*;
-import com.typee.typee.network.BaseParseService;
+import com.typee.typee.network.base.BaseParseService;
 
 /**
  * Created by winsonlim on 20/1/14.

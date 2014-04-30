@@ -1,9 +1,11 @@
 package com.typee.typee.util;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.typee.typee.service.DataService;
 import com.typee.typee.ui.base.BaseActivity;
 
 /**
@@ -12,10 +14,13 @@ import com.typee.typee.ui.base.BaseActivity;
 public class Util {
 	public static final String FRAGMENT_CLASS_NAME = "FRAGMENT_CLASS_NAME";
 
+	private static ProgressDialog ringProgressDialog;
+
 	/**
 	 * Checks if String is NULL or empty, after .trim()
 	 *
 	 * @param str String to be checked
+	 *
 	 * @return True if NULL/isEmpty(); Else false;
 	 */
 	public static boolean isNullOrEmpty(String str) {
@@ -34,6 +39,7 @@ public class Util {
 	 * Verify that this is a Singapore Mobile Number
 	 *
 	 * @param mobileNo Mobile Number
+	 *
 	 * @return True if this is a Singapore Mobile Number; Else false;
 	 */
 	public static boolean verifySingaporeMobileNo(String mobileNo) {
@@ -53,6 +59,7 @@ public class Util {
 	 * Remove all non-numerical characters.
 	 *
 	 * @param mobileNo String to be trimmed
+	 *
 	 * @return A string which only contain all numerical values (No re-arranging)
 	 */
 	public static String trimMobileNo(String mobileNo) {
@@ -71,6 +78,19 @@ public class Util {
 		}
 
 		return mobileNo;
+	}
+
+	/**
+	 * Start the data service running in background
+	 *
+	 * @param context Context of this activity
+	 */
+	public static void startService(Context context) {
+		// use this to start and trigger a service
+		Intent i = new Intent(context, DataService.class);
+
+		// potentially add data to the intent
+		context.startService(i);
 	}
 
 	/**
@@ -107,5 +127,19 @@ public class Util {
 		openFragmentInActivityIntent.putExtras(extras);
 
 		context.startActivity(openFragmentInActivityIntent);
+	}
+
+	public static void showProgressDialog(Context context, String message) {
+		ringProgressDialog = ProgressDialog.show(context, "Please wait", message, true);
+
+		ringProgressDialog.setCancelable(true);
+	}
+
+	public static void hideProgressDialog() {
+		if (ringProgressDialog != null && ringProgressDialog.isShowing()) {
+			ringProgressDialog.dismiss();
+
+			ringProgressDialog = null;
+		}
 	}
 }

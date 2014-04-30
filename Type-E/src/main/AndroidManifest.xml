@@ -1,39 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.typee.typee">
+    package="com.typee.typee" >
 
     <application
-        android:name=".ui.main.MainApplication"
+        android:name="com.typee.typee.ui.main.MainApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme" >
         <activity
-            android:name=".ui.main.SplashActivity"
+            android:name="com.typee.typee.ui.main.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
+            android:theme="@style/FullscreenTheme" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.typee.typee.ui.base.BaseActivity" />
+        <activity android:name="com.typee.typee.ui.main.MainActivity" />
 
-        <activity android:name=".ui.base.BaseActivity"/>
-        <activity android:name=".ui.main.MainActivity"/>
+        <service
+            android:name="com.typee.typee.service.DataService"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/service_name" >
+        </service>
 
-        <receiver android:name=".sms.IncomingSMSBroadcastReceiver">  
-            <intent-filter>        
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+        <receiver android:name="com.typee.typee.sms.IncomingSMSBroadcastReceiver" >
+  
+            <intent-filter>
+        
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
+        <service
+            android:name="com.typee.typee.MyService"
+            android:enabled="true"
+            android:exported="false" >
+        </service>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
 </manifest>

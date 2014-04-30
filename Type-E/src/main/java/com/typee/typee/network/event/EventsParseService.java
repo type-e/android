@@ -1,11 +1,15 @@
 package com.typee.typee.network.event;
 
+import com.parse.FindCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.typee.typee.dbTableDetails.Dbconfig;
-import com.typee.typee.network.BaseParseService;
+import com.parse.SaveCallback;
+import com.typee.typee.config.DbConfig;
+import com.typee.typee.network.base.BaseParseService;
+import com.typee.typee.network.base.SuccessListener;
+import com.typee.typee.network.model.Attendee;
+import com.typee.typee.network.model.Event;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,10 +18,6 @@ import java.util.List;
  * Created by winsonlim on 20/1/14.
  */
 public class EventsParseService extends BaseParseService {
-	private static final String eventNameKey = "eventName";
-	private static final String eventDescriptionKey = "eventDescription";
-	private static final String eventVenueKey = "eventVenue";
-	private static final String eventTimeKey = "eventTime";
 
 	private static EventsParseService instance;
 
@@ -28,27 +28,39 @@ public class EventsParseService extends BaseParseService {
 		return instance;
 	}
 
-	public void setEvent(String eventName, String eventDescription, String eventVenue, String eventTime, String username, final EventsParseListener eventsParseListener) {
-		HashMap<String, String> eventDetails = new HashMap<String, String>();
-		eventDetails.put(eventNameKey, eventName);
-		eventDetails.put(eventDescriptionKey, eventDescription);
-		eventDetails.put(eventVenueKey, eventVenue);
-		eventDetails.put(eventTimeKey, eventTime);
-		eventDetails.put(usernameKey, username);
+	public void createEvent(String eventName, String eventDescription, String eventVenue, String eventTime, String username, final SuccessListener successListener) {
 
-		try {
-			BaseParseService.getBaseParseService().setData(Dbconfig.eventTable, eventDetails);
+		Event eventDetails = new Event();
+		eventDetails.setUsername(username);
+		eventDetails.setEventDescription(eventDescription);
+		eventDetails.setEventName(eventName);
+		eventDetails.setEventTime(eventTime);
+		eventDetails.setEventVenue(eventVenue);
 
-			eventsParseListener.successful();
-		} catch (ParseException e) {
-			eventsParseListener.unsuccessful(e);
-		}
+		// Map Relation of Event to Attendee
+		Attendee eventAttendee = new Attendee();
+		eventAttendee.setEventAttendee(username);
+		eventAttendee.setEvent(eventDetails);
+
+		eventAttendee.saveInBackground(new SaveCallback() {
+			@Override
+			public void done(ParseException e) {
+				if (e != null) {
+					// FAILURE
+					successListener.unsuccessful(e);
+				}
+
+				// SUCCESS
+				successListener.successful();
+			}
+		});
+
 	}
 
 	public void deleteEvent(String tableName, String columnToCompare, String columnValue, final EventsParseListener eventsParseListener) {
 		try {
-			BaseParseService.getBaseParseService().deleteData(Dbconfig.eventTable, columnToCompare, columnValue);
-			eventsParseListener.successful();
+			BaseParseService.getBaseParseService().deleteData(DbConfig.eventTable, columnToCompare, columnValue);
+			eventsParseListener.successful(null);
 		} catch (ParseException e) {
 			eventsParseListener.unsuccessful(e);
 		}
@@ -73,14 +85,14 @@ public class EventsParseService extends BaseParseService {
 //        });
 
 		try {
-			BaseParseService.getBaseParseService().updateColumnValue(Dbconfig.eventTable, columnToUpdate, updateValue, columnToCompare, columnValue);
-			eventsParseListener.successful();
+			BaseParseService.getBaseParseService().updateColumnValue(DbConfig.eventTable, columnToUpdate, updateValue, columnToCompare, columnValue);
+			eventsParseListener.successful(null);
 		} catch (ParseException e) {
 			eventsParseListener.unsuccessful(e);
 		}
 	}
 
-	public void addUsersToEvent(String userID, String tableName, String columnToUpdate, String updateValue, String columnToCompare, String columnValue, final EventsParseListener eventsParseListener) {
+	public void addAttendeeToEvent(String userID, String tableName, String columnToUpdate, String updateValue, String columnToCompare, String columnValue, final EventsParseListener eventsParseListener) {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("tableName", tableName);
 		params.put("columnName", columnToCompare);
@@ -91,19 +103,30 @@ public class EventsParseService extends BaseParseService {
 
 		try {
 			ParseCloud.callFunction("insertUsersIntoEvent", params);
-			eventsParseListener.successful();
+			eventsParseListener.successful(null);
 		} catch (ParseException e) {
 			eventsParseListener.unsuccessful(e);
 		}
 	}
 
-	public void getEventsDetails(String tableName, final EventsParseListener eventsParseListener) {
-		ParseQuery<ParseObject> query = ParseQuery.getQuery(Dbconfig.eventTable);
-		try {
-			List<ParseObject> resultsList = query.find();
-			eventsParseListener.getEventsDetailsSuccessful(resultsList);
-		} catch (ParseException e) {
-			eventsParseListener.unsuccessful(e);
-		}
+	public void getAllEvents(String username, final GetAllEventsListener getAllEventsListener) {
+
+		ParseQuery<Attendee> query = ParseQuery.getQuery(Attendee.class);
+
+		// Get only the event this username is invited to
+		query.whereEqualTo(Attendee.eventAttendeeKey, username);
+
+		// Also get the Event object (relational data)
+		query.include(DbConfig.eventTable);
+
+		query.findInBackground(new FindCallback<Attendee>() {
+			public void done(List<Attendee> results, ParseException e) {
+				if (e == null) {
+					getAllEventsListener.successful(results);
+				} else {
+					getAllEventsListener.unsuccessful(e);
+				}
+			}
+		});
 	}
 }

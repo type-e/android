@@ -1,8 +1,8 @@
 package com.typee.typee.ui.main;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,11 +11,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.typee.typee.R;
+import com.typee.typee.service.DataService;
+import com.typee.typee.ui.base.BaseActivity;
 import com.typee.typee.ui.event.EventDetailsFragment;
+import com.typee.typee.ui.global.ViewFragmentTitles;
 import com.typee.typee.util.MyPagerSlidingTabStrip;
 import com.typee.typee.util.TypefaceHelper;
 
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 	public String TAG = this.getClass().getSimpleName();
 
 	private MyPagerSlidingTabStrip tabs;
@@ -62,9 +65,14 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+
+		stopService(new Intent(this, DataService.class));
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-
-
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -75,57 +83,31 @@ public class MainActivity extends Activity {
 
 // todo implement sliding menu here (open / back)
 
-
 	public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-		private final String[] TITLES = {PageTitle.CURRENT.toString(), PageTitle.FUTURE.toString(), PageTitle.PAST.toString()};
+		Fragment[] viewFragments = new Fragment[getCount()];
 
 		public ViewPagerAdapter(FragmentManager fm) {
 			super(fm);
+
+			for (int i = 0; i < getCount(); i++) {
+				viewFragments[i] = new EventDetailsFragment(getPageTitle(i));
+			}
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			return TITLES[position];
+			return ViewFragmentTitles.getTitle(position);
 		}
 
 		@Override
 		public int getCount() {
-			return TITLES.length;
+			return ViewFragmentTitles.values().length;
 		}
 
 		@Override
 		public Fragment getItem(int position) {
-
-			if (PageTitle.CURRENT.intValue == position) {
-//				return new AddEventFragment();
-
-			} else if (PageTitle.FUTURE.intValue == position) {
-
-			} else if (PageTitle.PAST.intValue == position) {
-
-			}
-
-			return new EventDetailsFragment();
-		}
-	}
-
-	private static enum PageTitle {
-		CURRENT("I'm going to...", 0),
-		FUTURE("I'm invited to...", 1),
-		PAST("I went to...", 2);
-
-		private String stringValue;
-		private int intValue;
-
-		private PageTitle(String toString, int value) {
-			stringValue = toString;
-			intValue = value;
-		}
-
-		@Override
-		public String toString() {
-			return stringValue;
+			return viewFragments[position];
 		}
 	}
 }

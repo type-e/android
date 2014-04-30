@@ -1,72 +1,58 @@
 package com.typee.typee.network.model;
 
-import java.util.Date;
+import com.parse.ParseClassName;
+import com.typee.typee.config.DbConfig;
+import com.typee.typee.network.model.util.DateTime;
 
 /**
- * Created by winsonlim on 16/3/14.
+ * Created by winsonlim on 28/4/14.
  */
-public class Event {
-	private String name;
-	private String venue;
-	private String creator;
-	private String description;
-	private Date startDate;
-	private Date endDate;
-	private int maxAttendee;
+@ParseClassName(DbConfig.eventTable)
+public class Event extends User {
+	public static final String eventNameKey = "eventName";
+	public static final String eventDescriptionKey = "eventDescription";
+	public static final String eventVenueKey = "eventVenue";
+	public static final String eventStartDateTimeKey = "eventStartDateTime";
 
-	public String getName() {
-		return name;
+	private DateTime eventDateTime;
+
+	public DateTime getEventDateTime() {
+		return eventDateTime;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setEventDateTime(DateTime eventDateTime) {
+		this.eventDateTime = eventDateTime;
 	}
 
-	public String getVenue() {
-		return venue;
+	public String getEventName() {
+		return getString(eventNameKey);
 	}
 
-	public void setVenue(String venue) {
-		this.venue = venue;
+	public void setEventName(String eventName) {
+		put(eventNameKey, eventName);
 	}
 
-	public String getCreator() {
-		return creator;
+	public String getEventDescription() {
+		return getString(eventDescriptionKey);
 	}
 
-	public void setCreator(String creator) {
-		this.creator = creator;
+	public void setEventDescription(String eventDescription) {
+		put(eventDescriptionKey, eventDescription);
 	}
 
-	public String getDescription() {
-		return description;
+	public String getEventTime() {
+		return getString(eventStartDateTimeKey);
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setEventTime(String eventTime) {
+		put(eventStartDateTimeKey, eventTime);
 	}
 
-	public Date getStartDate() {
-		return startDate;
+	public String getEventVenue() {
+		return getString(eventVenueKey);
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
-	public int getMaxAttendee() {
-		return maxAttendee;
-	}
-
-	public void setMaxAttendee(int maxAttendee) {
-		this.maxAttendee = maxAttendee;
+	public void setEventVenue(String eventVenue) {
+		put(eventVenueKey, eventVenue);
 	}
 }

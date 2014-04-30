@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 
 import com.typee.typee.config.Config;
-import com.typee.typee.model.SMS;
+import com.typee.typee.network.model.SMS;
 import com.typee.typee.ui.main.MainApplication;
 
 public class IncomingSMSBroadcastReceiver extends BroadcastReceiver {

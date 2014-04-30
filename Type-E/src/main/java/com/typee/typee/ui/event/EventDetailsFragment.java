@@ -6,23 +6,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.jake.quiltview.QuiltView;
 import com.typee.typee.R;
+import com.typee.typee.service.DataService;
+import com.typee.typee.service.DataServiceListener;
 import com.typee.typee.ui.base.BaseFragment;
 import com.typee.typee.util.Util;
 
 import java.util.ArrayList;
 
-public class EventDetailsFragment extends BaseFragment {
+public class EventDetailsFragment extends BaseFragment implements DataServiceListener {
 	private static final String ARG_POSITION = "position";
 
 	private View rootView;
 	private QuiltView quiltView;
 	private Button addEvent;
 
+	private String title;
+
 	public EventDetailsFragment() {
-		// Required empty public constructor
+		// Empty Constructor
+	}
+
+	@Override
+	public String getTitle() {
+		return title;
+	}
+
+	public EventDetailsFragment(CharSequence title) {
+		super();
+
+		this.title = title.toString();
 	}
 
 	@Override
@@ -43,7 +59,11 @@ public class EventDetailsFragment extends BaseFragment {
 		quiltView.setChildPadding(5);
 		quiltView.setOrientation(false);
 
-		addTestQuilts(200);
+		if (title != null) {
+			DataService.getService().getLatestEvent(title, this);
+		}
+
+		addTestQuilts(10);
 
 		addEvent.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -51,7 +71,6 @@ public class EventDetailsFragment extends BaseFragment {
 				Util.startActivity(getActivity(), AddEventFragment.class.getName());
 			}
 		});
-
 
 		// TODO: Here is how you set plurals in code
 //	    countdownUnitTextView.setText(getResources().getQuantityString(R.plurals.event_timeout_units_minutes, minutes));
@@ -74,7 +93,19 @@ public class EventDetailsFragment extends BaseFragment {
 		quiltView.addPatchImages(images);
 	}
 
-	private void gotoAddEvent() {
+	@Override
+	public void onDataReceived(Object data) {
+		if (getActivity() != null)
+			Toast.makeText(getActivity(), "onDataReceived: " + data.toString(), Toast.LENGTH_SHORT).show();
 
+		if(data != null) {
+
+		}
+	}
+
+	@Override
+	public void onDataError(Object error) {
+		if (getActivity() != null)
+			Toast.makeText(getActivity(), "onDataError: " + error.toString(), Toast.LENGTH_SHORT).show();
 	}
 }

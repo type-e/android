@@ -23,7 +23,7 @@ import com.typee.typee.R;
  * <p/>
  * Every Fragment class must be extended from this class
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 	public final String TAG = this.getClass().getSimpleName();
 
 	private boolean isDisplayHomeAsUpEnabled = false;
@@ -35,15 +35,18 @@ public class BaseFragment extends Fragment {
 	private boolean mContentShown;
 	private boolean mIsContentEmpty;
 
-
 	public BaseFragment() {
+		// Empty Constructor
 	}
+
+	public abstract String getTitle();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setHasOptionsMenu(true);
+
 	}
 
 	@Override
@@ -51,15 +54,6 @@ public class BaseFragment extends Fragment {
 		// Default loading ProgressBar template used is 'template_loading_bar'
 		// We can modify it according to our usage
 		return inflater.inflate(R.layout.template_loading_bar, container, false);
-	}
-
-	/**
-	 * Attach to view once the view hierarchy has been created.
-	 */
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-//		ensureContent();
 	}
 
 	/**
@@ -112,7 +106,8 @@ public class BaseFragment extends Fragment {
 	 * @param title Title of the action bar
 	 */
 	public void setTitle(String title) {
-		if (getActivity() != null && getActivity().getActionBar() != null) getActivity().getActionBar().setTitle(title);
+		if (getActivity() != null && getActivity().getActionBar() != null)
+			getActivity().getActionBar().setTitle(title);
 	}
 
 	/**
@@ -128,7 +123,8 @@ public class BaseFragment extends Fragment {
 	 * @return bundle of activity's intent
 	 */
 	public Bundle getExtras() {
-		if (getActivity() != null && getActivity().getIntent() != null) return getActivity().getIntent().getExtras();
+		if (getActivity() != null && getActivity().getIntent() != null)
+			return getActivity().getIntent().getExtras();
 
 		return null;
 	}
@@ -169,11 +165,11 @@ public class BaseFragment extends Fragment {
 	 *                                                                      *
 	 ***********************************************************************/
 
-
 	/**
 	 * Return content view or null if the content view has not been initialized.
 	 *
 	 * @return content view or null
+	 *
 	 * @see #setContentView(android.view.View)
 	 * @see #setContentView(int)
 	 */
@@ -186,6 +182,7 @@ public class BaseFragment extends Fragment {
 	 * the content will be replaced with a new view.
 	 *
 	 * @param view The desired content to display. Value can't be null.
+	 *
 	 * @see #setContentView(int)
 	 * @see #getContentView()
 	 */
@@ -214,6 +211,7 @@ public class BaseFragment extends Fragment {
 	 * Set the content content from a layout resource.
 	 *
 	 * @param layoutResId Resource ID to be inflated.
+	 *
 	 * @see #setContentView(android.view.View)
 	 * @see #getContentView()
 	 */
@@ -229,6 +227,7 @@ public class BaseFragment extends Fragment {
 	 * If you would like to have it shown, call this method to supply the text it should use.
 	 *
 	 * @param resId Identification of string from a resources
+	 *
 	 * @see #setEmptyText(CharSequence)
 	 */
 	public void setEmptyText(int resId) {
@@ -241,6 +240,7 @@ public class BaseFragment extends Fragment {
 	 * If you would like to have it shown, call this method to supply the text it should use.
 	 *
 	 * @param text Text for empty view
+	 *
 	 * @see #setEmptyText(int)
 	 */
 	public void setEmptyText(CharSequence text) {
@@ -304,6 +304,7 @@ public class BaseFragment extends Fragment {
 	 *
 	 * @param shown If true, the content view is shown; if false, the progress
 	 *              indicator. The initial value is true.
+	 *
 	 * @see #setContentShownNoAnimation(boolean)
 	 */
 	private void setContentShown(boolean shown) {
@@ -316,6 +317,7 @@ public class BaseFragment extends Fragment {
 	 *
 	 * @param shown If true, the content view is shown; if false, the progress
 	 *              indicator. The initial value is true.
+	 *
 	 * @see #setContentShown(boolean)
 	 */
 	private void setContentShownNoAnimation(boolean shown) {
@@ -371,6 +373,7 @@ public class BaseFragment extends Fragment {
 	 * Returns true if content is empty. The default content is not empty.
 	 *
 	 * @return true if content is null or empty
+	 *
 	 * @see #setContentEmpty(boolean)
 	 */
 	public boolean isContentEmpty() {
@@ -383,6 +386,7 @@ public class BaseFragment extends Fragment {
 	 * {@link #setContentView(android.view.View)} and content view not null.
 	 *
 	 * @param isEmpty true if content is empty else false
+	 *
 	 * @see #isContentEmpty()
 	 */
 	private void setContentEmpty(boolean isEmpty) {

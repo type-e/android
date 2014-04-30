@@ -9,20 +9,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.typee.typee.R;
-import com.typee.typee.network.event.EventsParseListener;
+import com.typee.typee.network.base.SuccessListener;
 import com.typee.typee.network.event.EventsParseService;
 import com.typee.typee.ui.base.BaseFragment;
 import com.typee.typee.util.StoredPreferences;
 import com.typee.typee.util.Util;
 
-import java.util.List;
-
 /**
  * Created by winsonlim on 16/3/14.
  */
-public class AddEventFragment extends BaseFragment implements EventsParseListener {
+public class AddEventFragment extends BaseFragment implements SuccessListener {
 
 	private View rootView;
 	private EditText eventNameEditText;
@@ -30,6 +27,15 @@ public class AddEventFragment extends BaseFragment implements EventsParseListene
 	private EditText eventVenueEditText;
 	private EditText eventDateTimeEditText;
 	private Button createEventButton;
+
+	public AddEventFragment() {
+		// Empty Constructor
+	}
+
+	@Override
+	public String getTitle() {
+		return null;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,22 +66,34 @@ public class AddEventFragment extends BaseFragment implements EventsParseListene
 	}
 
 	private void createEvent() {
-		String username = StoredPreferences.getMobileNo();
+		final String username = StoredPreferences.getMobileNo();
 
-		if(!Util.isNullOrEmpty(username)) {
+		if (!Util.isNullOrEmpty(username)) {
 			if (!Util.isNullOrEmpty(eventNameEditText.getText().toString())) {
 				if (!Util.isNullOrEmpty(eventDescriptionEditText.getText().toString())) {
 					if (!Util.isNullOrEmpty(eventVenueEditText.getText().toString())) {
 						if (!Util.isNullOrEmpty(eventDateTimeEditText.getText().toString())) {
 
-							EventsParseService.getEventsParseService().setEvent(
-									eventNameEditText.getText().toString(),
-									eventDescriptionEditText.getText().toString(),
-									eventVenueEditText.getText().toString(),
-									eventDateTimeEditText.getText().toString(),
-									username,
-									this
-							);
+							Util.showProgressDialog(getActivity(), "Creating event...");
+
+							new Thread(new Runnable() {
+								@Override
+								public void run() {
+									try {
+
+										EventsParseService.getEventsParseService().createEvent(
+												eventNameEditText.getText().toString(),
+												eventDescriptionEditText.getText().toString(),
+												eventVenueEditText.getText().toString(),
+												eventDateTimeEditText.getText().toString(),
+												username,
+												AddEventFragment.this
+										);
+									} catch (Exception e) {
+										// do nothing
+									}
+								}
+							}).start();
 
 						}
 					}
@@ -86,17 +104,16 @@ public class AddEventFragment extends BaseFragment implements EventsParseListene
 
 	@Override
 	public void successful() {
+		Util.hideProgressDialog();
+
 		Toast.makeText(getActivity(), "Successful!", Toast.LENGTH_SHORT).show();
 		finish();
 	}
 
 	@Override
 	public void unsuccessful(ParseException e) {
+		Util.hideProgressDialog();
+
 		Toast.makeText(getActivity(), "Unsucccessful!", Toast.LENGTH_SHORT).show();
-	}
-
-	@Override
-	public void getEventsDetailsSuccessful(List<ParseObject> resultsList) {
-
 	}
 }
