@@ -28,6 +28,19 @@ public class EventsParseService extends BaseParseService {
 		return instance;
 	}
 
+	/*
+	TODO change event data structure
+
+	When inserting a new event the following fields must be included:
+		dtstart
+		dtend if the event is non-recurring
+		duration if the event is recurring
+		rrule or rdate if the event is recurring
+		eventTimezone
+		a calendar_id
+	There are also further requirements when inserting or updating an event. See the section on Writing to Events.
+	 */
+
 	public void createEvent(String eventName, String eventDescription, String eventVenue, String eventTime, String username, final SuccessListener successListener) {
 
 		Event eventDetails = new Event();
