@@ -72,7 +72,7 @@ public class Event extends User {
 		return getString(eventRecurrenceKey);
 	}
 
-	public void setEventRecurrence(String eventRecurrenceKey) {
+	public void setEventRecurrence(String eventRecurrence) {
 		put(eventRecurrenceKey, eventRecurrence);
 	}
 
@@ -80,7 +80,7 @@ public class Event extends User {
 		return getString(eventLocation);
 	}
 
-	public void setEventLocation(String eventLocationKey) {
+	public void setEventLocation(String eventLocation) {
 		put(eventLocationKey, eventLocation);
 	}
 }
