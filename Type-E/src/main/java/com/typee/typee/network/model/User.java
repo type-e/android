@@ -24,16 +24,16 @@ public class User extends ParseObject {
 		return getDate(createdAtKey);
 	}
 
-	public void setCreatedAt(String createdAt) {
-		put(createdAtKey, createdAt);
-	}
+	// public void setCreatedAt(String createdAt) {
+	// 	put(createdAtKey, createdAt);
+	// }
 
 	public java.util.Date getUpdatedAt() {
 		return getDate(updatedAtKey);
 	}
 
-	public void setUpdatedAt(String updatedAt) {
-		put(updatedAtKey, updatedAt);
-	}
+	// public void setUpdatedAt(String updatedAt) {
+	// 	put(updatedAtKey, updatedAt);
+	// }
 
 }
