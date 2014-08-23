@@ -3,7 +3,7 @@ package com.typee.typee.network.model;
 import com.parse.ParseClassName;
 import com.typee.typee.config.DbConfig;
 import com.typee.typee.network.model.util.DateTime;
-
+import com.parse.ParseGeoPoint;
 /**
  * Created by winsonlim on 28/4/14.
  */
@@ -80,7 +80,7 @@ public class Event extends User {
 		return getString(eventLocation);
 	}
 
-	public void setEventLocation(String eventLocation) {
+	public void setEventLocation(ParseGeoPoint eventLocation) {
 		put(eventLocationKey, eventLocation);
 	}
 }
