@@ -56,9 +56,10 @@ public class EventsParseService {
 
 		// Map Relation of Event to Attendee
 		AttendeeParseService attendeeParseService = new AttendeeParseService();
+		String eventAttendeeTableName = eventName + "_Attendee";
 
 		if (columnsNameAndValues != null){
-			attendeeParseService.addAttendeeToEvent(eventDetails,columnsNameAndValues);
+			attendeeParseService.addAttendeeToEvent(eventDetails,eventAttendeeTableName,columnsNameAndValues);
 		}
 		else{
 			eventDetails.saveInBackground(new SaveCallback() {
