@@ -9,7 +9,7 @@ import com.parse.SaveCallback;
 // import com.typee.typee.network.base.BaseParseService;
 // import com.typee.typee.network.base.SuccessListener;
 import com.typee.typee.network.model.Attendee;
-// import com.typee.typee.network.model.Event;
+import com.typee.typee.network.model.Event;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,62 +28,32 @@ public class AttendeeParseService {
 		return instance;
 	}
 
-	//fire off per row
-	public void addAttendeeToEvent(Event eventObject,String eventAttendeeTableName,Map<String, String> columnsNameAndValues,final AttendeeParseListener attendeeParseListener) {
+	//fire off per user
+	public void addAttendeeToEvent(String eventName,String username,final AttendeeParseListener attendeeParseListener){
+
+		ParseObject eventAttendee = new ParseObject(eventName+"_Attendee");
+		Attendee attendee = new Attendee();
 		
-		Attendee attendeeDetails = new Attendee();
-		columnsNameAndValues.put(attendeeDetails.getAttendeeEvent,eventObject);
-		columnsNameAndValues.put(attendeeDetails.getAttendeeTableName,eventAttendeeTableName);
-
-		ParseCloud.callFunctionInBackground("addAttendeeToEvent", columnsNameAndValues, new FunctionCallback<String>() {
-	        public void done(String object, ParseException e) {
-		        if (e == null) {
-	 	           attendeeParseListener.successful();
-	               } else {
-	               attendeeParseListener.unsuccessful(e);
-	            	}
-	            }
-	        });
-		// 	ParseObject parseTable = new ParseObject(tableName);
-		// 	Set set = columnsNameAndValues.entrySet();
-		// 	Iterator i = set.iterator();
-
-		// 	while (i.hasNext()) {
-		// 		Map.Entry entry = (Map.Entry) i.next();
-		// 		parseTable.put((String) entry.getKey(), entry.getValue());
-		// 	}
-
-		// 	parseTable.put(tableName,eventObject);
-
-		// 	parseTable.saveInBackground(new SaveCallback() {
-		// 		@Override
-		// 		public void done(ParseException e) {
-		// 			if (e != null) {
-		// 				// FAILURE
-		// 				baseParseListener.unsuccessful(e);
-		// 			} else{
-		// 			// SUCCESS
-		// 				baseParseListener.successful();
-		// 			}
-		// 		}
-		// 	});
-		// }
+		eventAttendee.put(attendee.getAttendeeName(), username);
+		eventAttendee.saveInBackground(saveInBackground(new SaveCallback() {
+			@Override
+			public void done(ParseException e) {
+				if (e != null) {
+					// FAILURE
+					attendeeParseListener.unsuccessful(e);
+				} else {
+				// SUCCESS
+					attendeeParseListener.successful();
+				}
+			}
+		});
 	}
 
-	//fire off per row
-	public void deleteEventAttendee(Map<String, String> columnsNameAndValues,final AttendeeParseListener attendeeParseListener) {
-        ParseCloud.callFunctionInBackground("deleteEventAttendee", columnsNameAndValues, new FunctionCallback<String>() {
-            public void done(String object, ParseException e) {
-                if (e == null) {
-                    attendeeParseListener.successful();
-                } else {
-                    attendeeParseListener.unsuccessful(e);
-                }
-            }
-        });
-	}
-
-	public void updateEventAttendeeDetails(Map<String, String> columnsNameAndValues,final AttendeeParseListener attendeeParseListener) {
+	public void updateEventAttendeeDetails(String tableName,String objectID,Map<String, String> columnsNameAndValues,final AttendeeParseListener attendeeParseListener) {
+        
+        columnsNameAndValues.put("tableName",tableName);
+        columnsNameAndValues.put("key",objectID);
+        
         ParseCloud.callFunctionInBackground("updateEventAttendeeDetails", columnsNameAndValues, new FunctionCallback<String>() {
             public void done(String object, ParseException e) {
                 if (e == null) {

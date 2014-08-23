@@ -24,9 +24,6 @@ public class RegistrationParseService extends BaseParseService {
 		user.setUsername(mobileNumber);
 		user.setPassword(mobileNumber);
 
-		// normal ParseObject
-//		user.put("MobileNumber", mobileNumber);
-
 		user.signUpInBackground(new SignUpCallback() {
 			public void done(ParseException e) {
 				if (e == null) {

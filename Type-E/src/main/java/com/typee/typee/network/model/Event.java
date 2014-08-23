@@ -13,7 +13,7 @@ public class Event extends User {
 	public static final String eventDescriptionKey = "EventDescription";
 	public static final String eventVenueKey = "EventVenue";
 	public static final String eventNoteKey = "EventNote";
-	public static final String eventLocationKey = "EventLocation";
+	public static final String eventLocation = "EventLocation";
 	public static final String eventRecurrenceKey = "EventRecurrence";
 	public static final String eventStartDateTimeKey = "EventStartDateTime";
 	public static final String eventEndDateTimeKey = "EventEndDateTime";
@@ -77,7 +77,7 @@ public class Event extends User {
 	}
 
 	public String getEventLocation() {
-		return getString(eventRecurrenceKey);
+		return getString(eventLocation);
 	}
 
 	public void setEventLocation(String eventLocationKey) {

@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "Type-E": {
+            "applicationId": "mFrewsKnWGVdz9AJJHfaN7WXKxq5LAz2Mp8B8mIR", 
+            "masterKey": "yDf2hYKGGjeDQPnIOH2NIJOJZcRzq9ACZNxMQhd4"
+        }, 
+        "_default": {
+            "link": "Type-E"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.16"
+    }
+}

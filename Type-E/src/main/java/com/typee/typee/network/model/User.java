@@ -11,9 +11,14 @@ public class User extends ParseObject {
 	public static final String usernameKey = "username";
 	public static final String createdAtKey = "createdAt";
 	public static final String updatedAtKey = "updatedAt";
+	public static final String userActivityKey = "Activity";
 
 	public String getUsername() {
 		return getString(usernameKey);
+	}
+
+	public String getUserActivity() {
+		return getString(userActivityKey);
 	}
 
 	public void setUsername(String username) {

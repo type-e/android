@@ -48,6 +48,22 @@ public class BaseParseService {
 		});
 	}
 
+	public void deleteObject(String objectID,String tableName,final EventsParseListener eventsParseListener) {
+		Map<String,String> map = new HashMap();
+		map.put("key",objectID);
+		map.put("tableName",tableName);
+		
+        ParseCloud.callFunctionInBackground("deleteEvent", map, new FunctionCallback<String>() {
+            public void done(String object, ParseException e) {
+                if (e == null) {
+                    eventsParseListener.successful();
+                } else {
+                    eventsParseListener.unsuccessful(e);
+                }
+            }
+        });
+	}
+
 	// public void setData(String tableName, HashMap columnsNameAndValuesHM) throws ParseException {
 	// 	ParseObject parseTable = new ParseObject(tableName);
 	// 	parseTable = initParseTable(parseTable, columnsNameAndValuesHM);
