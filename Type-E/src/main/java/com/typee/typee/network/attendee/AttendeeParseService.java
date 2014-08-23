@@ -28,6 +28,11 @@ public class AttendeeParseService {
 		Attendee attendee = new Attendee();
 		
 		eventAttendee.put(attendee.getAttendeeName(), username);
+		eventAttendee.put(attendee.getAttendeeTask(), null);
+		eventAttendee.put(attendee.getAttendeeSplittedBill(), null);
+		eventAttendee.put(attendee.getAttendeeLocation(), null);
+		eventAttendee.put(attendee.getAttendeeStatusKey(), null);
+		
 		eventAttendee.saveInBackground(saveInBackground(new SaveCallback() {
 			@Override
 			public void done(ParseException e) {
