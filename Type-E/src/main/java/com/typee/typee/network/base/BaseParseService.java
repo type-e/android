@@ -25,7 +25,7 @@ public class BaseParseService {
 		return instance;
 	}
 
-	public void insertRowIntoParseTable(String tableName,Map<String, String> columnsNameAndValues,final BaseParseListener baseParseListener) {
+	public void insertRowIntoParseTable(String tableName,Map<String, String> columnsNameAndValues,final SuccessListener successListener) {
 		ParseObject parseTable = new ParseObject(tableName);
 		// Set set = columnsNameAndValues.entrySet();
 		Iterator i = set.entrySet().iterator();
@@ -39,10 +39,10 @@ public class BaseParseService {
 			public void done(ParseException e) {
 				if (e != null) {
 					// FAILURE
-					baseParseListener.unsuccessful(e);
+					successListener.unsuccessful(e);
 				} else{
 				// SUCCESS
-					baseParseListener.successful();
+					successListener.successful();
 				}
 			}
 		});
