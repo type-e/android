@@ -24,7 +24,7 @@ public class Event extends User {
 		return eventStartDateTimeKey;
 	}
 
-	public void setEventStartDateTime(DateTime eventStartDateTimeKey) {
+	public void setEventStartDateTime(Date eventStartDateTimeKey) {
 		this.eventStartDateTimeKey = eventStartDateTimeKey;
 	}
 
@@ -32,7 +32,7 @@ public class Event extends User {
 		return eventEndDateTimeKey;
 	}
 
-	public void setEventEndDateTime(DateTime eventEndDateTimeKey) {
+	public void setEventEndDateTime(Date eventEndDateTimeKey) {
 		this.eventEndDateTimeKey = eventEndDateTimeKey;
 	}
 
