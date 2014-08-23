@@ -9,19 +9,31 @@ import com.typee.typee.network.model.util.DateTime;
  */
 @ParseClassName(DbConfig.eventTable)
 public class Event extends User {
-	public static final String eventNameKey = "eventName";
-	public static final String eventDescriptionKey = "eventDescription";
-	public static final String eventVenueKey = "eventVenue";
-	public static final String eventStartDateTimeKey = "eventStartDateTime";
+	public static final String eventNameKey = "EventName";
+	public static final String eventDescriptionKey = "EventDescription";
+	public static final String eventVenueKey = "EventVenue";
+	public static final String eventNoteKey = "EventNote";
+	public static final String eventLocationKey = "EventLocation";
+	public static final String eventRecurrenceKey = "EventRecurrence";
+	public static final String eventStartDateTimeKey = "EventStartDateTime";
+	public static final String eventEndDateTimeKey = "EventEndDateTime";
 
 	private DateTime eventDateTime;
 
-	public DateTime getEventDateTime() {
-		return eventDateTime;
+	public DateTime getEventStartDateTime() {
+		return eventStartDateTimeKey;
 	}
 
-	public void setEventDateTime(DateTime eventDateTime) {
-		this.eventDateTime = eventDateTime;
+	public void setEventStartDateTime(DateTime eventStartDateTimeKey) {
+		this.eventStartDateTimeKey = eventStartDateTimeKey;
+	}
+
+	public DateTime getEventEndDateTime() {
+		return eventEndDateTimeKey;
+	}
+
+	public void setEventEndDateTime(DateTime eventEndDateTimeKey) {
+		this.eventEndDateTimeKey = eventEndDateTimeKey;
 	}
 
 	public String getEventName() {
@@ -40,12 +52,12 @@ public class Event extends User {
 		put(eventDescriptionKey, eventDescription);
 	}
 
-	public String getEventTime() {
-		return getString(eventStartDateTimeKey);
+	public String getEventNote() {
+		return getString(eventNoteKey);
 	}
 
-	public void setEventTime(String eventTime) {
-		put(eventStartDateTimeKey, eventTime);
+	public void setEventNote(String note) {
+		put(eventNoteKey, note);
 	}
 
 	public String getEventVenue() {
@@ -54,5 +66,21 @@ public class Event extends User {
 
 	public void setEventVenue(String eventVenue) {
 		put(eventVenueKey, eventVenue);
+	}
+
+	public String getEventRecurrence() {
+		return getString(eventRecurrenceKey);
+	}
+
+	public void setEventRecurrence(String eventRecurrenceKey) {
+		put(eventRecurrenceKey, eventRecurrence);
+	}
+
+	public String getEventLocation() {
+		return getString(eventRecurrenceKey);
+	}
+
+	public void setEventLocation(String eventLocationKey) {
+		put(eventLocationKey, eventLocation);
 	}
 }
