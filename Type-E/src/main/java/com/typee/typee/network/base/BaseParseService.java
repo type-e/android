@@ -1,6 +1,5 @@
 package com.typee.typee.network.base;
 
-// import com.parse.LogInCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;

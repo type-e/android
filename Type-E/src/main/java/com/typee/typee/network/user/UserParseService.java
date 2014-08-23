@@ -1,18 +1,10 @@
 package com.typee.typee.network.user;
 
-import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
-// import com.typee.typee.config.DbConfig;
-// import com.typee.typee.network.base.BaseParseService;
-// import com.typee.typee.network.base.SuccessListener;
 import com.typee.typee.network.model.User;
-
-import java.util.HashMap;
-import java.util.Map;
-// import java.util.List;
 
 /**
  * Created by winsonlim on 20/1/14.
