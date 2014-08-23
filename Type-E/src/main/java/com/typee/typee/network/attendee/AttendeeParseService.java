@@ -20,7 +20,7 @@ import java.util.List;
 public class AttendeeParseService {
 
 	private static AttendeeParseService instance;
-	private static final String tableNameKey = "EventAttendeeTableName";
+	
 	public static AttendeeParseService getAttendeeParseService() {
 		if (instance == null)
 			instance = new AttendeeParseService();
@@ -30,9 +30,10 @@ public class AttendeeParseService {
 
 	//fire off per row
 	public void addAttendeeToEvent(Event eventObject,String eventAttendeeTableName,Map<String, String> columnsNameAndValues,final AttendeeParseListener attendeeParseListener) {
+		
 		Attendee attendeeDetails = new Attendee();
 		columnsNameAndValues.put(attendeeDetails.getAttendeeEvent,eventObject);
-		columnsNameAndValues.put(tableNameKey,eventAttendeeTableName);
+		columnsNameAndValues.put(attendeeDetails.getAttendeeTableName,eventAttendeeTableName);
 
 		ParseCloud.callFunctionInBackground("addAttendeeToEvent", columnsNameAndValues, new FunctionCallback<String>() {
 	        public void done(String object, ParseException e) {

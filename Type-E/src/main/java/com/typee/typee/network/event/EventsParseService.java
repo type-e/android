@@ -41,7 +41,7 @@ public class EventsParseService {
 	There are also further requirements when inserting or updating an event. See the section on Writing to Events.
 	 */
 
-	public void createEvent(String eventName,String eventDescription,String eventVenue,String eventTime,String username,Map<String, String> columnsNameAndValues,final EventsParseListener eventsParseListener) {
+	public Event createEvent(String eventName,String eventDescription,String eventVenue,String eventTime,String username,Map<String, String> columnsNameAndValues,final EventsParseListener eventsParseListener) {
 
 		Event eventDetails = new Event();
 		// eventDetails.setUsername(username);
@@ -54,6 +54,7 @@ public class EventsParseService {
 		eventDetails.setEventEndDateTime(eventTime);
 		eventDetails.setEventVenue(eventVenue);
 
+		return eventDetails;
 		// Map Relation of Event to Attendee
 		AttendeeParseService attendeeParseService = new AttendeeParseService();
 		String eventAttendeeTableName = eventName + "_Attendee";

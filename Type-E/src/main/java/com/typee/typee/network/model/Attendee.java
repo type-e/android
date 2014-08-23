@@ -16,11 +16,16 @@ public class Attendee extends ParseObject {
 	public static final String attendeeNameKey = "AttendeeName";
 	public static final String attendeeLocationKey = "AttendeeLocation";
 	public static final String attendeeStatusKey = "AttendeeStatus";
+	private static final String attendeeTableNameKey = "AttendeeTableName";
 	// private static final String attendeeTableName = "";
 
 	// public Attendee(String eventAtteedeeTableName) {
 	// 	this.eventAttendeeTableName = eventAtteedeeTableName;
 	// }
+
+	public String getAttendeeTableName() {
+		return getString(attendeeTableNameKey);
+	}
 
 	public String getAttendeeEvent() {
 		return getString(attendeeEventKey);
