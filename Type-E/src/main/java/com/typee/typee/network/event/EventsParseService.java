@@ -61,20 +61,6 @@ public class EventsParseService {
 		if (columnsNameAndValues != null){
 			attendeeParseService.addAttendeeToEvent(eventDetails,eventAttendeeTableName,columnsNameAndValues);
 		}
-		else{
-			eventDetails.saveInBackground(new SaveCallback() {
-				@Override
-				public void done(ParseException e) {
-					if (e != null) {
-						// FAILURE
-						eventsParseListener.unsuccessful(e);
-					} else {
-						// SUCCESS
-						eventsParseListener.successful();
-					}
-				}
-			});
-		}
 	}
 
 	public void deleteEvent(Map<String, String> columnsNameAndValues,final EventsParseListener eventsParseListener) {
