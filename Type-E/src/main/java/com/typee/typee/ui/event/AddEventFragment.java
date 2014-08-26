@@ -16,6 +16,8 @@ import com.typee.typee.ui.base.BaseFragment;
 import com.typee.typee.util.StoredPreferences;
 import com.typee.typee.util.Util;
 
+import java.util.Date;
+
 /**
  * Created by winsonlim on 16/3/14.
  */
@@ -30,11 +32,6 @@ public class AddEventFragment extends BaseFragment implements SuccessListener {
 
 	public AddEventFragment() {
 		// Empty Constructor
-	}
-
-	@Override
-	public String getTitle() {
-		return null;
 	}
 
 	@Override
@@ -74,21 +71,25 @@ public class AddEventFragment extends BaseFragment implements SuccessListener {
 					if (!Util.isNullOrEmpty(eventVenueEditText.getText().toString())) {
 						if (!Util.isNullOrEmpty(eventDateTimeEditText.getText().toString())) {
 
-							Util.showProgressDialog(getActivity(), "Creating event...");
+							// TODO: implement listener or use Parse's saveEventually
+//							Util.showProgressDialog(getActivity(), "Creating event...");
+							Toast.makeText(getActivity(), "Event created!", Toast.LENGTH_SHORT).show();
 
 							new Thread(new Runnable() {
 								@Override
 								public void run() {
 									try {
-
 										EventsParseService.getEventsParseService().createEvent(
 												eventNameEditText.getText().toString(),
 												eventDescriptionEditText.getText().toString(),
 												eventVenueEditText.getText().toString(),
-												eventDateTimeEditText.getText().toString(),
-												username,
-												AddEventFragment.this
-										);
+												new Date(System.currentTimeMillis()),
+												new Date(System.currentTimeMillis()),
+												"eventNote",
+												0L,
+												0L,
+												"eventRecurrence",
+												username);
 									} catch (Exception e) {
 										// do nothing
 									}

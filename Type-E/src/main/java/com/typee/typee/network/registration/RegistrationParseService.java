@@ -1,6 +1,9 @@
 package com.typee.typee.network.registration;
 
-import com.parse.*;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 import com.typee.typee.network.base.BaseParseService;
 
 /**
@@ -42,24 +45,24 @@ public class RegistrationParseService extends BaseParseService {
 	//call parse cloud
 	public void setUserDetails(final String firstName, final String lastName, final String nickname, final String emailAddress, final int addressFK, final String birthday, final String gender, final String country, final RegistrationListener registrationListener) throws ParseException {
 
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
-        	// set details
-        	currentUser.setEmail(emailAddress);
-        	// normal ParseObject
-	        currentUser.put("FirstName", firstName);
-	        currentUser.put("LastName", lastName);
-	        currentUser.put("Nickname", nickname);
-	        currentUser.put("AddressFK", addressFK);
-	        currentUser.put("Birthday", birthday);
-	        currentUser.put("Gender", gender);
-	        currentUser.put("Country", country);
+		ParseUser currentUser = ParseUser.getCurrentUser();
+		if (currentUser != null) {
+			// set details
+			currentUser.setEmail(emailAddress);
+			// normal ParseObject
+			currentUser.put("FirstName", firstName);
+			currentUser.put("LastName", lastName);
+			currentUser.put("Nickname", nickname);
+			currentUser.put("AddressFK", addressFK);
+			currentUser.put("Birthday", birthday);
+			currentUser.put("Gender", gender);
+			currentUser.put("Country", country);
 
-            currentUser.save();
-        } else {
-        	// current user does not exists
-        }
-    }
+			currentUser.save();
+		} else {
+			// current user does not exists
+		}
+	}
 
 	public void checkIfUserExists(final String mobileNumber, final FindUserListener findUserListener) {
 
@@ -69,7 +72,6 @@ public class RegistrationParseService extends BaseParseService {
 			public void done(ParseUser user, ParseException e) {
 
 				//TODO: check for EXCEPTION.
-
 
 				if (user != null) {
 					// Hooray! The user exists in database.

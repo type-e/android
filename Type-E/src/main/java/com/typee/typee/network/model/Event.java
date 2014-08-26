@@ -1,9 +1,11 @@
 package com.typee.typee.network.model;
 
 import com.parse.ParseClassName;
-import com.typee.typee.config.DbConfig;
-import com.typee.typee.network.model.util.DateTime;
 import com.parse.ParseGeoPoint;
+import com.typee.typee.config.DbConfig;
+
+import java.util.Date;
+
 /**
  * Created by winsonlim on 28/4/14.
  */
@@ -17,23 +19,22 @@ public class Event extends User {
 	public static final String eventRecurrenceKey = "EventRecurrence";
 	public static final String eventStartDateTimeKey = "EventStartDateTime";
 	public static final String eventEndDateTimeKey = "EventEndDateTime";
+	public static final String eventLocationKey = "EventLocationKey";
 
-	private DateTime eventDateTime;
-
-	public DateTime getEventStartDateTime() {
-		return eventStartDateTimeKey;
+	public Date getEventStartDateTime() {
+		return getDate(eventStartDateTimeKey);
 	}
 
 	public void setEventStartDateTime(Date eventStartDateTimeKey) {
-		this.eventStartDateTimeKey = eventStartDateTimeKey;
+		put(this.eventStartDateTimeKey, eventStartDateTimeKey);
 	}
 
-	public DateTime getEventEndDateTime() {
-		return eventEndDateTimeKey;
+	public Date getEventEndDateTime() {
+		return getDate(eventEndDateTimeKey);
 	}
 
 	public void setEventEndDateTime(Date eventEndDateTimeKey) {
-		this.eventEndDateTimeKey = eventEndDateTimeKey;
+		put(this.eventEndDateTimeKey, eventEndDateTimeKey);
 	}
 
 	public String getEventName() {

@@ -3,9 +3,13 @@ package com.typee.typee.network.event;
 import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.typee.typee.network.attendee.AttendeeParseService;
 import com.typee.typee.network.model.Event;
-import com.typee.typee.network.base.UserParseService;
-import com.typee.typee.network.base.AttendeeParseService;
+import com.typee.typee.network.user.UserParseService;
+
+import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by winsonlim on 20/1/14.
@@ -14,7 +18,7 @@ public class EventsParseService {
 
 	private static EventsParseService instance;
 
-	public static EventsParseService getEventsParseService() {
+	public static synchronized EventsParseService getEventsParseService() {
 		if (instance == null)
 			instance = new EventsParseService();
 
@@ -34,7 +38,9 @@ public class EventsParseService {
 	There are also further requirements when inserting or updating an event. See the section on Writing to Events.
 	 */
 
-	public void createEvent(String eventName,String eventDescription,String eventVenue,Date eventStartDateTime,Date eventEndDateTime,String eventNote,double eventLocationLong,souble eventLocationLat,String eventRecurrence,String username) {
+	public void createEvent(String eventName, String eventDescription, String eventVenue, Date eventStartDateTime, Date eventEndDateTime, String eventNote, double eventLocationLong, double eventLocationLat, String eventRecurrence, String username) {
+
+		Boolean callDone = false;
 
 		Event eventDetails = new Event();
 		ParseGeoPoint point = new ParseGeoPoint(eventLocationLong, eventLocationLat);
@@ -51,10 +57,10 @@ public class EventsParseService {
 		String eventAttendeeTableName = eventName + "_Attendee";
 
 		UserParseService userParseService = new UserParseService();
-		userParseService.addUserActivity(username,eventDetails);
+		userParseService.addUserActivity(username, eventDetails, null);
 
 		AttendeeParseService attendeeParseService = new AttendeeParseService();
-		attendeeParseService.addAttendeeToEvent(eventAttendeeTableName,username)
+		attendeeParseService.addAttendeeToEvent(eventAttendeeTableName, username, null);
 	}
 
 	//query base on per screen information; parse cloud
@@ -62,19 +68,19 @@ public class EventsParseService {
 
 	}
 
-	public void updateEventDetails(String tableName,String objectID,Map<String, String> columnsNameAndValues,final EventsParseListener eventsParseListener) {
+	public void updateEventDetails(String tableName, String objectID, Map<String, String> columnsNameAndValues, final EventsParseListener eventsParseListener) {
 
-		columnsNameAndValues.put("tableName",tableName);
-        columnsNameAndValues.put("key",objectID);
-        
+		columnsNameAndValues.put("tableName", tableName);
+		columnsNameAndValues.put("key", objectID);
+
 		ParseCloud.callFunctionInBackground("updateEventDetails", columnsNameAndValues, new FunctionCallback<String>() {
-            public void done(String object, ParseException e) {
-                if (e == null) {
-                    eventsParseListener.successful();
-                } else {
-                    eventsParseListener.unsuccessful(e);
-                }
-            }
-        });
+			public void done(String object, ParseException e) {
+				if (e == null) {
+					eventsParseListener.successful(object);
+				} else {
+					eventsParseListener.unsuccessful(e);
+				}
+			}
+		});
 	}
 }

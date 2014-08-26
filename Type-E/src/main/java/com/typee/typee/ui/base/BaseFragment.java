@@ -39,8 +39,6 @@ public abstract class BaseFragment extends Fragment {
 		// Empty Constructor
 	}
 
-	public abstract String getTitle();
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

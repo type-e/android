@@ -45,11 +45,6 @@ public class VerifyTokenFragment extends BaseFragment {
 	}
 
 	@Override
-	public String getTitle() {
-		return null;
-	}
-
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 

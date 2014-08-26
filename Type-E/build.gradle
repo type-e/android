@@ -7,10 +7,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.12.2'
     }
 }
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 repositories {
     mavenCentral()
@@ -18,33 +18,28 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.0.3'
-
+    buildToolsVersion '19.1.0'
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 19
-        versionCode versionMajor * 100 + versionMinor * 10 + versionPatch
-        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+    }
+    productFlavors {
     }
 }
 
 dependencies {
     compile 'com.android.support:support-v13:18.0.0'
     compile 'com.android.support:gridlayout-v7:18.0.+'
-
     // Otto for communications between activity, fragments, services, etc.
     compile 'com.squareup:otto:1.3.4'
-
     // DeployGate for builds distributions
     compile 'com.deploygate:sdk:3.1'
-
     // Joda-Time for managing of date time
     compile 'net.danlew:android.joda:2.3.3'
-
     // For ViewPager tabs (Use till https://github.com/astuetz/PagerSlidingTabStrip/pull/83 have been merged)
-//    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
-
+    //    compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile files('libs/Parse-1.4.0.jar')
-    compile files('libs/volley_14022014.jar')
-    compile project(':QuiltViewLibrary')
+//    compile files('libs/volley_14022014.jar')
+
+    compile 'com.squareup.okhttp:okhttp:2.0.0'
 }

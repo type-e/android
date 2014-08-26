@@ -3,6 +3,7 @@
     <color name="background_tabs">#cdcdcd</color>
     <color name="background_pager">#666666</color>
     <color name="background_tab_pressed">#33cdcdcd</color>
+    <color name="background_cards">#e5e5e5</color>
 
     <color name="black_overlay">#66000000</color>
 

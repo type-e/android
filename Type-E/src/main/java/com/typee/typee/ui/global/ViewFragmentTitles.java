@@ -5,9 +5,9 @@ package com.typee.typee.ui.global;
  */
 
 public enum ViewFragmentTitles {
-	CURRENT("I'm going to..."),
-	FUTURE("I'm invited to..."),
-	PAST("I went to...");
+	CURRENT("CONFIRMED"),
+	FUTURE("PENDING");
+//	PAST("PAST");
 
 	private String title;
 	private final static ViewFragmentTitles[] values = ViewFragmentTitles.values();
@@ -34,8 +34,8 @@ public enum ViewFragmentTitles {
 				return CURRENT.toString();
 			case FUTURE:
 				return FUTURE.toString();
-			case PAST:
-				return PAST.toString();
+//			case PAST:
+//				return PAST.toString();
 		}
 
 		return null;

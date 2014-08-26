@@ -19,8 +19,6 @@ import com.typee.typee.util.MyPagerSlidingTabStrip;
 import com.typee.typee.util.TypefaceHelper;
 
 public class MainActivity extends BaseActivity {
-	public String TAG = this.getClass().getSimpleName();
-
 	private MyPagerSlidingTabStrip tabs;
 	private ViewPager pager;
 	private ViewPagerAdapter adapter;
@@ -30,15 +28,6 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-//		Bundle bundle = getIntent().getExtras();
-//		if (bundle != null && bundle.containsKey(Util.FRAGMENT_CLASS_NAME)) {
-//			Fragment fragment = Fragment.instantiate(this, bundle.getString(Util.FRAGMENT_CLASS_NAME));
-//
-//			if (savedInstanceState == null) {
-//				getFragmentManager().beginTransaction().add(R.id.container, fragment).commit();
-//			}
-//		}
-
 		tabs = (MyPagerSlidingTabStrip) findViewById(R.id.tabs);
 		pager = (ViewPager) findViewById(R.id.pager);
 		adapter = new ViewPagerAdapter(getFragmentManager());
@@ -46,10 +35,6 @@ public class MainActivity extends BaseActivity {
 		pager.setPageMargin((int) getResources().getDimension(R.dimen.viewpager_margin));
 
 		pager.setAdapter(adapter);
-
-		tabs.setViewPager(pager);
-
-		tabs.setShouldExpand(true);
 
 		// Set Tabs Typeface (Font)
 		tabs.setTypeface(TypefaceHelper.get(this, TypefaceHelper.ROBOTO_LIGHT), 0);
@@ -62,6 +47,11 @@ public class MainActivity extends BaseActivity {
 		// Set Tabs Color
 		tabs.setTextColorResource(R.color.tabs_text_selector);
 		tabs.setDividerColorResource(R.color.clear);
+
+		// Set Tabs to expand to device width
+		tabs.setShouldExpand(true);
+
+		tabs.setViewPager(pager);
 	}
 
 	@Override
@@ -91,7 +81,7 @@ public class MainActivity extends BaseActivity {
 			super(fm);
 
 			for (int i = 0; i < getCount(); i++) {
-				viewFragments[i] = new EventDetailsFragment(getPageTitle(i));
+				viewFragments[i] = EventDetailsFragment.newInstance(getPageTitle(i).toString());
 			}
 		}
 

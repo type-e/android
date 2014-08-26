@@ -15,7 +15,6 @@ import com.typee.typee.network.registration.RegistrationParseService;
 import com.typee.typee.network.registration.TokenSentListener;
 import com.typee.typee.network.registration.TokenService;
 import com.typee.typee.ui.base.BaseFragment;
-import com.typee.typee.ui.event.EventDetailsFragment;
 import com.typee.typee.ui.main.MainActivity;
 import com.typee.typee.util.StoredPreferences;
 import com.typee.typee.util.Util;
@@ -30,11 +29,6 @@ public class LoginFragment extends BaseFragment {
 
 	public LoginFragment() {
 		// Empty Constructor
-	}
-
-	@Override
-	public String getTitle() {
-		return null;
 	}
 
 	@Override
@@ -108,7 +102,6 @@ public class LoginFragment extends BaseFragment {
 					StoredPreferences.setMobileNo(mobileNo);
 
 					Intent openFragmentInActivityIntent = new Intent(getActivity(), MainActivity.class);
-					openFragmentInActivityIntent.putExtra(Util.FRAGMENT_CLASS_NAME, EventDetailsFragment.class.getName());
 
 					startActivity(openFragmentInActivityIntent);
 

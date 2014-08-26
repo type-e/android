@@ -1,15 +1,21 @@
 package com.typee.typee.network.base;
 
+import com.parse.FunctionCallback;
 import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 // import java.util.HashMap;
-import java.util.Iterator;
 // import java.util.List;
-import java.util.Map;
+
+// import java.util.HashMap;
+// import java.util.List;
 // import java.util.Set;
 
 public class BaseParseService {
@@ -24,10 +30,11 @@ public class BaseParseService {
 		return instance;
 	}
 
-	public void insertRowIntoParseTable(String tableName,Map<String, String> columnsNameAndValues,final SuccessListener successListener) {
+	public void insertRowIntoParseTable(String tableName, Map<String, String> columnsNameAndValues, final SuccessListener successListener) {
 		ParseObject parseTable = new ParseObject(tableName);
-		// Set set = columnsNameAndValues.entrySet();
-		Iterator i = set.entrySet().iterator();
+
+		Set set = columnsNameAndValues.entrySet();
+		Iterator i = set.iterator();
 
 		while (i.hasNext()) {
 			Map.Entry entry = (Map.Entry) i.next();
@@ -39,28 +46,28 @@ public class BaseParseService {
 				if (e != null) {
 					// FAILURE
 					successListener.unsuccessful(e);
-				} else{
-				// SUCCESS
+				} else {
+					// SUCCESS
 					successListener.successful();
 				}
 			}
 		});
 	}
 
-	public void deleteObject(String objectID,String tableName,final EventsParseListener eventsParseListener) {
-		Map<String,String> map = new HashMap();
-		map.put("key",objectID);
-		map.put("tableName",tableName);
-		
-        ParseCloud.callFunctionInBackground("deleteEvent", map, new FunctionCallback<String>() {
-            public void done(String object, ParseException e) {
-                if (e == null) {
-                    eventsParseListener.successful();
-                } else {
-                    eventsParseListener.unsuccessful(e);
-                }
-            }
-        });
+	public void deleteObject(String objectID, String tableName, final BaseParseListener baseParseListener) {
+		Map<String, String> map = new HashMap();
+		map.put("key", objectID);
+		map.put("tableName", tableName);
+
+		ParseCloud.callFunctionInBackground("deleteEvent", map, new FunctionCallback<String>() {
+			public void done(String object, ParseException e) {
+				if (e == null) {
+					baseParseListener.successful();
+				} else {
+					baseParseListener.unsuccessful(e);
+				}
+			}
+		});
 	}
 
 	// public void setData(String tableName, HashMap columnsNameAndValuesHM) throws ParseException {
@@ -102,7 +109,7 @@ public class BaseParseService {
 //
 //    }
 
-	
+
 
 	/*
 	//Do not need for now

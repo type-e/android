@@ -5,14 +5,8 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
-import com.parse.ParseException;
-import com.typee.typee.network.event.EventsParseService;
-import com.typee.typee.network.event.GetAllEventsListener;
-import com.typee.typee.network.model.Attendee;
 import com.typee.typee.ui.global.ViewFragmentTitles;
 import com.typee.typee.util.StoredPreferences;
-
-import java.util.List;
 
 /**
  * Created by winsonlim on 25/4/14.
@@ -74,16 +68,19 @@ public class DataService extends Service {
 		String mobileNo = StoredPreferences.getMobileNo();
 		if (mobileNo == null) throw new NullPointerException();
 
-		EventsParseService.getEventsParseService().getAllEvents(mobileNo, new GetAllEventsListener() {
-			@Override
-			public void successful(List<Attendee> data) {
-				serviceListener.onDataReceived(data);
-			}
 
-			@Override
-			public void unsuccessful(ParseException e) {
-				serviceListener.onDataError(e);
-			}
-		});
+		//TODO; get latest events
+
+//		EventsParseService.getEventsParseService().getAllEvents(mobileNo, new GetAllEventsListener() {
+//			@Override
+//			public void successful(List<Attendee> data) {
+//				serviceListener.onDataReceived(data);
+//			}
+//
+//			@Override
+//			public void unsuccessful(ParseException e) {
+//				serviceListener.onDataError(e);
+//			}
+//		});
 	}
 }
