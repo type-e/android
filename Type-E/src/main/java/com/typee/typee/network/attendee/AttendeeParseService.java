@@ -30,8 +30,8 @@ public class AttendeeParseService {
 		Attendee attendee = new Attendee();
 
 		eventAttendee.put(attendee.getAttendeeName(), username);
-		eventAttendee.put(attendee.getAttendeeTask(), null);
-		eventAttendee.put(attendee.getAttendeeSplittedBill(), null);
+		// eventAttendee.put(attendee.getAttendeeTask(), null);
+		// eventAttendee.put(attendee.getAttendeeSplittedBill(), null);
 
 		// TODO: no attendeeLocationKey and getAttendeeStatusKey
 //		eventAttendee.put(attendee.getAttendeeLocation(), null);
