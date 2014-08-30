@@ -38,20 +38,20 @@ public class EventsParseService {
 	There are also further requirements when inserting or updating an event. See the section on Writing to Events.
 	 */
 
-	public void createEvent(String eventName, String eventDescription, String eventVenue, Date eventStartDateTime, Date eventEndDateTime, String eventNote, double eventLocationLong, double eventLocationLat, String eventRecurrence, String username) {
+	public void createEvent(String eventName, String eventDescription, String eventVenue, /*Date eventStartDateTime, Date eventEndDateTime, String eventNote, double eventLocationLong, double eventLocationLat, String eventRecurrence,*/ String username) {
 
 		Boolean callDone = false;
 
 		Event eventDetails = new Event();
-		ParseGeoPoint point = new ParseGeoPoint(eventLocationLong, eventLocationLat);
+		// ParseGeoPoint point = new ParseGeoPoint(eventLocationLong, eventLocationLat);
 		// eventDetails.setUsername(username);
 		eventDetails.setEventDescription(eventDescription);
 		eventDetails.setEventName(eventName);
-		eventDetails.setEventNote(eventNote);
-		eventDetails.setEventLocation(point);
-		eventDetails.setEventRecurrence(eventRecurrence);
-		eventDetails.setEventStartDateTime(eventStartDateTime);
-		eventDetails.setEventEndDateTime(eventEndDateTime);
+		// eventDetails.setEventNote(eventNote);
+		// eventDetails.setEventLocation(point);
+		// eventDetails.setEventRecurrence(eventRecurrence);
+		// eventDetails.setEventStartDateTime(eventStartDateTime);
+		// eventDetails.setEventEndDateTime(eventEndDateTime);
 		eventDetails.setEventVenue(eventVenue);
 
 		String eventAttendeeTableName = eventName + "_Attendee";
