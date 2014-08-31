@@ -40,7 +40,7 @@ public class Attendee extends ParseObject {
 		return getString(attendeeNameKey);
 	}
 
-	//TODO: no attendeeLocationKey
+    //TODO: no attendeeLocationKey
 //	public String getAttendeeLocation() {
 //		return getString(attendeeLocationKey);
 //	}
@@ -49,14 +49,24 @@ public class Attendee extends ParseObject {
 		return getString(attendeeStatusKey);
 	}
 
-	// public void setEventAttendee(String eventAttendee) {
-	// 	eventAttendeeTableName.put(eventAttendeeKey, eventAttendee);
-	// }
 
-	// public Event getEvent() {
-	// 	return (Event) getParseObject(DbConfig.eventTable);
-	// }
 
-	// public void setEvent(Event eventObjectId) {
-	// 	eventAttendeeTableName.put(DbConfig.eventTable, eventObjectId);
+    public static final String eventAttendeeKey = "eventAttendee";
+
+    public String getEventAttendee() {
+        return getString(eventAttendeeKey);
+    }
+
+    public void setEventAttendee(String eventAttendee) {
+        put(eventAttendeeKey, eventAttendee);
+    }
+
+    public Event getEvent() {
+        return (Event) getParseObject(DbConfig.eventTable);
+    }
+
+    public void setEvent(Event eventObjectId) {
+        put(DbConfig.eventTable, eventObjectId);
+    }
+
 }

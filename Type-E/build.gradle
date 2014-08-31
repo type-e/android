@@ -23,8 +23,19 @@ android {
         minSdkVersion 16
         targetSdkVersion 19
     }
+
     productFlavors {
     }
+
+    signingConfigs {
+        release {
+            storeFile file('../keystores/typee.jks')
+            storePassword "billions"
+            keyAlias "Tigerspike"
+            keyPassword "billions"
+        }
+    }
+
 }
 
 dependencies {

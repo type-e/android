@@ -11,15 +11,15 @@ import java.util.Date;
  */
 @ParseClassName(DbConfig.eventTable)
 public class Event extends User {
-	public static final String eventNameKey = "EventName";
-	public static final String eventDescriptionKey = "EventDescription";
-	public static final String eventVenueKey = "EventVenue";
-	public static final String eventNoteKey = "EventNote";
-	public static final String eventLocation = "EventLocation";
-	public static final String eventRecurrenceKey = "EventRecurrence";
-	public static final String eventStartDateTimeKey = "EventStartDateTime";
-	public static final String eventEndDateTimeKey = "EventEndDateTime";
-	public static final String eventLocationKey = "EventLocationKey";
+	public static final String eventNameKey = "eventName";
+	public static final String eventDescriptionKey = "eventDescription";
+	public static final String eventVenueKey = "eventVenue";
+	public static final String eventNoteKey = "eventNote";
+	public static final String eventLocation = "eventLocation";
+	public static final String eventRecurrenceKey = "eventRecurrence";
+	public static final String eventStartDateTimeKey = "eventStartDateTime";
+	public static final String eventEndDateTimeKey = "eventEndDateTime";
+	public static final String eventLocationKey = "eventLocationKey";
 
 	public Date getEventStartDateTime() {
 		return getDate(eventStartDateTimeKey);
