@@ -10,5 +10,9 @@ public class DbConfig {
 	public static final String eventTable = "Event";
 
 	public static final String attendeeTable = "Attendee";
+	
+	public static final String prefixForEventAttendee = "AttendeeFor_";
+	
+	public static final String prefixForUserJoinedEventTable = "ActivityFor_";
 
 }
