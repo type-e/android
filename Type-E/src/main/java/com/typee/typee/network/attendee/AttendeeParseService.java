@@ -9,6 +9,7 @@ import com.parse.ParseObject;
 import com.parse.SaveCallback;
 import com.typee.typee.network.base.SuccessListener;
 import com.typee.typee.network.model.Attendee;
+import com.typee.typee.config.DbConfig;
 
 import java.util.Map;
 
@@ -28,13 +29,13 @@ public class AttendeeParseService {
     }
 
     //fire off per user
-    public void addAttendeeToEvent(String eventName, String username, final SuccessListener successListener) {
-        String tableName = "Attendee_" + eventName;
+    public void addAttendeeToEvent(String eventName, String userName, final SuccessListener successListener) {
+        String tableName = DbConfig.prefixForEventAttendee + eventName;
 
         ParseObject eventAttendee = new ParseObject(tableName);
 
-        eventAttendee.put(Attendee.attendeeNameKey, username);
-        // eventAttendee.put(attendee.getAttendeeTask(), null);
+        eventAttendee.put(Attendee.attendeeNameKey, userName);
+        //eventAttendee.put(Attendee.attendeeTaskKey,  taskDescription);
         // eventAttendee.put(attendee.getAttendeeSplittedBill(), null);
 
         // TODO: no attendeeLocationKey and getAttendeeStatusKey
@@ -63,6 +64,26 @@ public class AttendeeParseService {
         columnsNameAndValues.put("key", objectID);
 
         ParseCloud.callFunctionInBackground("updateEventAttendeeDetails", columnsNameAndValues, new FunctionCallback<String>() {
+            public void done(String object, ParseException e) {
+                if (e == null) {
+                    attendeeParseListener.successful(object);
+                } else {
+                    attendeeParseListener.unsuccessful(e);
+                }
+            }
+        });
+    }
+    
+    //return attendee name, status - phrase 1
+    //phase 2 - return task, location
+    public void getEventAttendee(String tableName, String objectID, final AttendeeParseListener attendeeParseListener){
+        String tableName = DbConfig.prefixForEventAttendee + tableName;
+        
+        Map <String, String> tableMap = new HashMap<String, String>();
+        
+        tableMap.put("tableName",tableName);
+        
+        ParseCloud.callFunctionInBackground("updateEventAttendeeDetails", tableMap, new FunctionCallback<String>() {
             public void done(String object, ParseException e) {
                 if (e == null) {
                     attendeeParseListener.successful(object);
