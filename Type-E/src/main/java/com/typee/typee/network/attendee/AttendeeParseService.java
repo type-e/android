@@ -77,7 +77,8 @@ public class AttendeeParseService {
     
     //return attendee name, status - phrase 1
     //phase 2 - return task, location
-    public void getEventAttendee(String tableName, String objectID, final AttendeeParseListener attendeeParseListener){
+    public void getEventAttendee(String tableName, final AttendeeParseListener attendeeParseListener){
+    /*public void getEventAttendee(String tableName, String objectID, final AttendeeParseListener attendeeParseListener){*/
         tableName = DbConfig.prefixForEventAttendee + tableName;
         
         Map <String, String> tableMap = new HashMap<String, String>();
