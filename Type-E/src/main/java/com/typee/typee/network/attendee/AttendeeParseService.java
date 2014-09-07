@@ -83,6 +83,7 @@ public class AttendeeParseService {
         Map <String, String> tableMap = new HashMap<String, String>();
         
         tableMap.put("tableName",tableName);
+        // tableMap.put("objectId",objectID);
         
         ParseCloud.callFunctionInBackground("updateEventAttendeeDetails", tableMap, new FunctionCallback<String>() {
             public void done(String object, ParseException e) {

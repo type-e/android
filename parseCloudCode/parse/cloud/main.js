@@ -106,6 +106,31 @@ Parse.Cloud.define("updateEventAttendeeDetails", function(request,response){
     });
 });
  
+ Parse.Cloud.define("getEventAttendee", function(request,response){
+    var _tableName = Parse.Object.extend(request.params.tableName);
+    // var _key = request.params.key;
+ 
+    var nameArray = [];
+    var statusArray = [];
+ 
+    var query = new Parse.Query(_tableName);
+    query.get(/*_key, */{
+        success: function(results) {
+            for(i = 0; i < results.length; i++){
+                statusArray[i] = results[i].get("Status");
+                nameArray[i] = results[i].get("AttendeeName")   
+            }
+            var jsonName = JSON.parse(nameArray);
+            var jsonStatus = JSON.parse(statusArray);
+            var finalData = jsonName.concat(jsonStatus);
+            response.success(finalData);
+        },
+        error: function(error) {
+          response.error("Error " + error.code + " : " + error.message);
+        }
+    });
+});
+
 // Parse.Cloud.define("insertUsersIntoEvent", function(request,response){
 //     var _tableName = Parse.Object.extend(request.params.tableName);
 //     var _column = request.params.columnName;
